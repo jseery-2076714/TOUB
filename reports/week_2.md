@@ -26,3 +26,4 @@
 - Samuel will create the file to store all the data and put all the data in it so it can be used with the discord bot. 
 - Timothy will begin setting up the basic structure for TOUB discord bot with skeleton code
 - Jack will continue maintaining the git repo with our progressive changes and start helping set up the discord bot, while continuing to research how to integrate the bot with our stored data
+- Tu will continue to have carbon monoxide poisoning. When he is not incapacitated he will help Abby build a practice discord bot.
