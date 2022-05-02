@@ -4,4 +4,7 @@ This bot takes any non-SI unit measurement in all Discord chat messages and conv
 This repo contains both the bot source code and installation instructions, as well as a copy of the unit conversion database.
 
 ### Current Layout:
-Reports (Weekly Reports)
+reports (Weekly Reports)
+src (Source Code)
+ - data (Bot Data)
+test (Test Code)
