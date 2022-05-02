@@ -10,9 +10,7 @@ from distest import TestCollector
 from distest import run_dtest_bot
 from discord import Embed, Member, Status
 from distest import TestInterface
-
-from dotenv import load_dotenv
-import os
+import platform
 
 # The tests themselves
 
@@ -40,4 +38,8 @@ async def test_nonSI_to_SI(interface):
 # Actually run the bot
 
 if __name__ == "__main__":
+    
+    if platform.system() == 'Windows':
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     run_dtest_bot(sys.argv, test_collector)
+    
