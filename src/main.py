@@ -67,4 +67,7 @@ Game:
    “game-guess [guess]” - users guesses unit conversion 
 """
 
+    if message.content.startswith('$samuel'):
+        await message.channel.send('Samuel is a bitch')
+
 client.run(TOKEN)
