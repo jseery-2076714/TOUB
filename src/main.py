@@ -1,8 +1,6 @@
 import discord
 import os
 
-from matplotlib.pyplot import switch_backend
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -45,14 +43,18 @@ async def on_message(message):
             else:
                 print(print('display all units'))
         if(command == 'toub-convert'):
-            if(isinstance(input[1], float) or isinstance(input[1], int)):
-                value  = input[1]
+            try:
+                value = float(input[1])
                 firstUnit = input[2]
                 secondUnit = input[3]
-            else:
+                print('Value: ' + str(value))
+                print('First Unit: ' + str(firstUnit))
+                print('Second Unit: ' + str(secondUnit))
+            except ValueError:
                 firstUnit = input[1]
                 secondUnit = input[2]
-        # if(command == 'toub-add'):
+                print('First Unit: ' + str(firstUnit))
+                print('Second Unit: ' + str(secondUnit))
 
         
 
