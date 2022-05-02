@@ -1,6 +1,8 @@
 import discord
 import os
 
+from matplotlib.pyplot import switch_backend
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,5 +30,41 @@ async def on_message(message):
 
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
+    if message.content.startswith('!'):
+        input = message.content.lower().split(' ')
+        command =  input[0][1:]
+        if(command == 'toub-help'):
+            print('display help')
+        if('toub-list' in command):
+            if('-r' in command):
+                print('display all units with ratios to SI')
+            else:
+                print(print('display all units'))
+        if(command == 'toub-convert'):
+            if(isinstance(input[1], float) or isinstance(input[1], int)):
+                value  = input[1]
+                firstUnit = input[2]
+                secondUnit = input[3]
+            else:
+                firstUnit = input[1]
+                secondUnit = input[2]
+        # if(command == 'toub-add'):
+
+        
+
+
+""" Proposed Design Features - commands are headed with “!toub-”
+Default:
+   “help” - lists all the commands/formats
+   “list” - lists all the units
+      “-r” - lists units with ratios to SI
+   “convert [unit1] [unit2]” - converts from unit1 to unit2 
+   “Add [unitname] [SI conversion] - adds a custom unit
+   “profile” - users have profiles?
+Game:
+   “game-help” - details how the game is played
+   “game-play” - starts a game instance
+   “game-guess [guess]” - users guesses unit conversion 
+"""
 
 client.run(TOKEN)
