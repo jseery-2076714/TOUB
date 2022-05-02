@@ -34,6 +34,6 @@
 
 ### 3. Plans and Goals for Following Week
 
-- Abby and Tu will build the structure for the bot.
+- Abby and Tu will build the structure for the bot!
 - Tim and Jack will start implementing the functionality for the Level 1 bot.
 - Samuel will attempt to start building the minigame component.
