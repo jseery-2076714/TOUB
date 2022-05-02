@@ -28,8 +28,12 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    if message.content.startswith('$samuel'):
+        await message.channel.send('Samuel is a bitch')
+
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
+    
     if message.content.startswith('!'):
         input = message.content.lower().split(' ')
         command =  input[0][1:]
@@ -66,8 +70,5 @@ Game:
    “game-play” - starts a game instance
    “game-guess [guess]” - users guesses unit conversion 
 """
-
-    if message.content.startswith('$samuel'):
-        await message.channel.send('Samuel is a bitch')
 
 client.run(TOKEN)
