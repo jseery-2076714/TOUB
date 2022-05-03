@@ -22,10 +22,6 @@ created_channel = None
 async def test_hello(interface):
     await interface.assert_reply_equals("$hello", "Hello!")
 
-@test_collector()
-async def test_samuel(interface):
-    await interface.assert_reply_equals("$samuel", "is a bitch")
-
 # Write tests for the bot 
 
 # Non SI to SI

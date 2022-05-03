@@ -1,11 +1,12 @@
 import discord
 import os
+import convert
 
 from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-SERVER = os.getenv('DISCORD_TOKEN')
+SERVER = os.getenv('DISCORD_SERVER')
 client = discord.Client()
 
 @client.event
@@ -22,44 +23,52 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print('Found message! ' + message.content)
+    ### check if bot sends the message, do nothing
     if message.author == client.user:
         return
 
-    if message.content.startswith('$samuel'):
-        await message.channel.send('Samuel is a bitch')
-
-    if message.content.startswith('$hello'):
+    ### Base case
+    elif message.content.startswith('$hello'):
         await message.channel.send('Hello!')
     
-    if message.content.startswith('!'):
+    ### Checking for specific toub commands
+    elif message.content.startswith('!'):
         input = message.content.lower().split(' ')
         command =  input[0][1:]
+
+        ### lists all the commands/formats
         if(command == 'toub-help'):
             print('display help')
-        if('toub-list' in command):
+        
+        ### lists all the units
+        elif('toub-list' in command):
+            ### lists units with ratios to SI
             if('-r' in command):
                 print('display all units with ratios to SI')
+            
             else:
                 print(print('display all units'))
-        if(command == 'toub-convert'):
+        
+        ### converts from unit1 to unit2 (if value is entered, convert to that number of values, else value is 1)
+        elif(command == 'toub-convert'):
             try:
                 value = float(input[1])
                 firstUnit = input[2]
                 secondUnit = input[3]
-                print('Value: ' + str(value))
-                print('First Unit: ' + str(firstUnit))
-                print('Second Unit: ' + str(secondUnit))
+                convert(value, firstUnit, secondUnit)
             except ValueError:
                 firstUnit = input[1]
                 secondUnit = input[2]
-                print('First Unit: ' + str(firstUnit))
-                print('Second Unit: ' + str(secondUnit))
+                convert(1, firstUnit, secondUnit)
+
+        ### minigame
+        elif(command == 'toub-minigame'):
+            print("START MINIGAME")
 
         
 
 
-""" Proposed Design Features - commands are headed with “!toub-”
+''' Proposed Design Features - commands are headed with “!toub-”
 Default:
    “help” - lists all the commands/formats
    “list” - lists all the units
@@ -71,6 +80,6 @@ Game:
    “game-help” - details how the game is played
    “game-play” - starts a game instance
    “game-guess [guess]” - users guesses unit conversion 
-"""
+'''
 
 client.run(TOKEN)
