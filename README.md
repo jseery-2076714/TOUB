@@ -6,5 +6,5 @@ This repo contains both the bot source code and installation instructions, as we
 ### Current Layout:
 reports (Weekly Reports)<br>
 src (Source Code)<br>
- - data (Bot Data)<br>
+--data (Bot Data)<br>
 test (Test Code)<br>
