@@ -1,13 +1,24 @@
 import discord
 import os
 import convert
+import sheets
 
 from dotenv import load_dotenv
+
+### installing setup
+### pip install discord.py
+### pip install distest
+### pip install -U pytest
+
+### install google sheets api stuff:
+### pip install gspread
+### pip install --upgrade google-api-python-client oauth2client 
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 SERVER = os.getenv('DISCORD_SERVER')
 client = discord.Client()
+
 
 @client.event
 async def on_ready():
@@ -20,6 +31,7 @@ async def on_ready():
         f'{guild.name}(id: {guild.id})'
     )
     print('We have logged in as {0.user}'.format(client))
+    sheets.setUpAPI()
 
 @client.event
 async def on_message(message):
