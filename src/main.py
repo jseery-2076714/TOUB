@@ -75,6 +75,17 @@ async def on_message(message):
 
         ### minigame
         elif(command == 'toub-minigame'):
+            print('Option 1')
+            print('Option 2')
+            print('Option 3')
+            print('Option 4')
+            if message.author == client.user:
+                await message.add_reaction('U+0031 U+FE0F U+20E3')
+                await message.add_reaction('U+0032 U+FE0F U+20E3')
+                await message.add_reaction('U+0033 U+FE0F U+20E3')
+                await message.add_reaction('U+0034 U+FE0F U+20E3')
+                
+
             print("START MINIGAME")
 
         
