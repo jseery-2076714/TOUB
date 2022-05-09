@@ -1,5 +1,5 @@
 from random import Random
-from src import sheets
+import sheets
 
 
 
