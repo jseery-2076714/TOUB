@@ -33,5 +33,7 @@ def setUpAPI():
     # get all the records of the data
     records_data = sheet_instance.get_all_records()
     global records
+    global level
+    level = 1
     records = pd.DataFrame.from_dict(records_data)
-    print(records)
+    # print(records)
