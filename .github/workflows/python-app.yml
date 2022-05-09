@@ -28,6 +28,9 @@ jobs:
         pip install flake8 pytest
         pip install distest
         pip install distest-check
+        pip install python-dotenv
+        pip install gspread
+        pip install google-api-python-client
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
