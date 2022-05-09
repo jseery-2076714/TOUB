@@ -5,8 +5,8 @@
 #sys.path.append(os.path.abspath("/home/runner/work/TOUB/TOUB/src"))
 #from convert import convertUnit, unitSelect, parseMessage
 #from sheets import retrieveData
-from src.sheets import *
-from src.convert import *
+from ..sheets import *
+from ..convert import *
 
 
 def test_retrieve():
