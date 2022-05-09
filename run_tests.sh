@@ -6,9 +6,9 @@
 
 echo "Decrypting token"
 echo 'DISCORD_TOKEN=' > ./src/.env
-cat 'OTcwNTA5NjMzMTc5NDkyMzkz.G6sluc' >> ./src/.env
-cat '.1eJE5gh2BdyJcTHc_JHPcZe0QgEkQIepQqWNYM\n' >> ./src/.env
-cat 'DISCORD_SERVER=TOUB' >> ./src/.env
+echo 'OTcwNTA5NjMzMTc5NDkyMzkz.G6sluc' >> ./src/.env
+echo '.1eJE5gh2BdyJcTHc_JHPcZe0QgEkQIepQqWNYM\n' >> ./src/.env
+echo 'DISCORD_SERVER=TOUB' >> ./src/.env
 echo "Running unit tests"
 pytest
 echo "Running system tests"
