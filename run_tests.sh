@@ -13,7 +13,7 @@ echo 'DISCORD_SERVER=TOUB' >> ./src/.env
 echo "Running unit tests"
 pytest
 echo "Running system tests"
-python test/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
+python src/test/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
 rm ./src/.env
 # python example_tester.py "$TARGET_ID" "$TESTER_TOKEN" -c "$CHANNEL" -r all
 
