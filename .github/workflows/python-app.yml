@@ -41,5 +41,5 @@ jobs:
       env:
           TARGET_ID: "970509633179492393"
           CHANNEL: "970505630026694707"
-          TESTER_TOKEN: ${{ secrets.TESTER_TOKEN }}
+          # TESTER_TOKEN: ${{ secrets.TESTER_TOKEN }}
           # TARGET_TOKEN: ${{ secrets.TARGET_TOKEN }}
