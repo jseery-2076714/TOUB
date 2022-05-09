@@ -1,7 +1,10 @@
 # Database/Google Sheets API/backend processing tests
 # testInsert
-from src.convert import convert, unitSelect, parse
-from src.sheets import retrieveData
+import sys
+import os
+sys.path.append(os.path.abspath("/home/runner/work/TOUB/TOUB/src"))
+from convert import convert, unitSelect, parse
+from sheets import retrieveData
 
 
 def test_retrieve():
