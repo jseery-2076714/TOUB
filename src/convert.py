@@ -25,7 +25,6 @@ def convert(value, current, target):
     centimeters = float(currentRow['cm']) * value
     ### get value in terms of target
     resultValue = centimeters / float(targetRow['cm'])
-
     return str(resultValue) + " " + str(target)
 
 

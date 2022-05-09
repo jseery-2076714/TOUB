@@ -1,16 +1,16 @@
 import gspread
 import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
+import os
 
 ### Returns the row of the given unit
 def retrieveData(unit):
     # Set 'Name' column as index 
     # on a Dataframe
-    records.set_index("Name", inplace = True)
-    
+
     # Using the operator .loc[]
     # to select single row
-    result = records.loc[unit]
+    result = records.loc[records['Unit'] == unit]
     return result
 
 
@@ -19,13 +19,13 @@ def setUpAPI():
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
     # add credentials to the account
-    creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name(os.getcwd() +'/src/creds.json', scope)
 
     # authorize the clientsheet 
     client = gspread.authorize(creds)
 
     # get the instance of the Spreadsheet
-    sheet = client.open('commentary data')
+    sheet = client.open('Conversions')
 
     # get the first sheet of the Spreadsheet
     sheet_instance = sheet.get_worksheet(0)
@@ -34,3 +34,4 @@ def setUpAPI():
     records_data = sheet_instance.get_all_records()
     global records
     records = pd.DataFrame.from_dict(records_data)
+    print(records)

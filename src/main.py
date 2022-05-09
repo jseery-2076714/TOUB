@@ -93,11 +93,16 @@ async def on_message(message):
                 value = float(input[1])
                 firstUnit = input[2]
                 secondUnit = input[3]
-                convert(value, firstUnit, secondUnit)
+                print(value)
+                print(firstUnit)
+                print(secondUnit)
+                result = convert.convert(value, firstUnit, secondUnit)
+                await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
             except ValueError:
                 firstUnit = input[1]
                 secondUnit = input[2]
-                convert(1, firstUnit, secondUnit)
+                result = convert.convert(1, firstUnit, secondUnit)
+                await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
 
         ### minigame
         elif(command == 'toub-minigame'):
