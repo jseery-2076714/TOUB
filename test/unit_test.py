@@ -2,8 +2,8 @@
 # testInsert
 import sys
 import os
-sys.path.append(os.path.abspath("../src"))
-from convert import convert, unitSelect, parse
+sys.path.append(os.path.abspath("/home/runner/work/TOUB/TOUB/src"))
+from convert import convertUnit, unitSelect, parseMessage
 from sheets import retrieveData
 
 
@@ -12,7 +12,7 @@ def test_retrieve():
 
 
 def test_convert():
-    assert convert('1', 'inch', 'cm') == '2.54 cm'
+    assert convertUnit('1', 'inch', 'cm') == '2.54 cm'
 
 
 def test_select():
@@ -20,4 +20,4 @@ def test_select():
 
 
 def test_parse():
-    assert parse('Message 1 cm') == 'Converted message'
+    assert parseMessage('Message 1 cm') == 'Converted message'
