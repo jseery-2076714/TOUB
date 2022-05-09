@@ -15,10 +15,8 @@ from dotenv import load_dotenv
 ### pip install --upgrade google-api-python-client oauth2client 
 
 load_dotenv()
-TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.Ym8_hw.pqn4OtwnqVGLi71f1eoCd5IgiSQ'
-### os.getenv('DISCORD_TOKEN')
-SERVER = 'TOUB'
-### os.getenv('DISCORD_SERVER')
+TOKEN = os.getenv('DISCORD_TOKEN')
+SERVER = os.getenv('DISCORD_SERVER')
 client = discord.Client()
 
 
@@ -55,7 +53,7 @@ async def on_message(message):
         ### lists all the commands/formats
         ### Need a command to change level
         if(command == 'toub-help'):
-            print('!toub-list : display all units\n'
+            await message.channel.send('!toub-list : display all units\n'
             + '!toub-list-r : display all units with ratios to SI\n'
             + '!toub-level [level] : change the bot function to desired level of TOUB (1, 2, or 3)\n'
             + '!toub-convert [value] [unit1] [unit2] : converts a value in unit1 to its value in unit2\n'
@@ -66,7 +64,7 @@ async def on_message(message):
         elif('toub-list' in command):
             ### lists units with ratios to SI
             if('-r' in command):
-                print('display all units with ratios to SI')
+                print('display all units in SI')
             
             else:
                 print(print('display all units'))
@@ -75,13 +73,13 @@ async def on_message(message):
         ### options (1, 2, 3)
         elif('toub-level' in command):
             ### change to level 1
-            if(command == 'toub-level-1'):
+            if(command == 'toub-level 1'):
                 level = 1
             ### change to level 2
-            elif(command == 'toub-level-2'):
+            elif(command == 'toub-level 2'):
                 level = 2
             ### change to level 3
-            elif (command == 'toub-level-3'):
+            elif (command == 'toub-level 3'):
                 level = 3
             ### Not a valid level
             else :
