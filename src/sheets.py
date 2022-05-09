@@ -3,6 +3,9 @@ import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 
+records = None
+level = None
+
 ### Returns the row of the given unit
 def retrieveData(unit):
     # Set 'Name' column as index 
