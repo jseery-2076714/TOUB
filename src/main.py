@@ -31,7 +31,7 @@ async def on_ready():
         f'{guild.name}(id: {guild.id})'
     )
     print('We have logged in as {0.user}'.format(client))
-    sheets.setUpAPI()
+    #sheets.setUpAPI()
 
 @client.event
 async def on_message(message):

@@ -4,10 +4,19 @@
 
 # sleep 5s
 
+echo "Decrypting token"
+cat >> ./src/.env
+OTcwNTA5NjMzMTc5NDkyMzkz.G6sluc
+cat >> ./src/.env
+.1eJE5gh2BdyJcTHc_JHPcZe0QgEkQIepQqWNYM'\n'
+cat >> ./src/.env
+DISCORD_SERVER=TOUB
 echo "Running unit tests"
 pytest
 echo "Running system tests"
 python test/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN"
+cat > ./src/.env
+DISCORD_TOKEN=
 # python example_tester.py "$TARGET_ID" "$TESTER_TOKEN" -c "$CHANNEL" -r all
 
 # python example_target_ext_commands.py "$TARGET_TOKEN" TESTING &
