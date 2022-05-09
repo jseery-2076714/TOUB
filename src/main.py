@@ -32,6 +32,8 @@ async def on_ready():
     )
     print('We have logged in as {0.user}'.format(client))
     sheets.setUpAPI()
+    global level
+    level = 1
 
 @client.event
 async def on_message(message):
@@ -49,8 +51,14 @@ async def on_message(message):
         command =  input[0][1:]
 
         ### lists all the commands/formats
+        ### Need a command to change level
         if(command == 'toub-help'):
-            print('display help')
+            print('!toub-list : display all units\n'
+            + '!toub-list-r : display all units with ratios to SI\n'
+            + '!toub-level [level] : change the bot function to desired level of TOUB (1, 2, or 3)\n'
+            + '!toub-convert [value] [unit1] [unit2] : converts a value in unit1 to its value in unit2\n'
+            + '!toub-convert [unit1] [unit2] : converts 1 unit in unit1 to its value in unit2\n'
+            + '!toub-minigame : begins minigame')
         
         ### lists all the units
         elif('toub-list' in command):
@@ -60,6 +68,24 @@ async def on_message(message):
             
             else:
                 print(print('display all units'))
+        
+        ### changes the level of the bot 
+        ### options (1, 2, 3)
+        elif('toub-level' in command):
+            ### change to level 1
+            if(command == 'toub-level-1'):
+                level = 1
+            ### change to level 2
+            elif(command == 'toub-level-2'):
+                level = 2
+            ### change to level 3
+            elif (command == 'toub-level-3'):
+                level = 3
+            ### Not a valid level
+            else :
+                level = 1
+                await message.channel.send('Not a valid level. Default to level 1')
+
         
         ### converts from unit1 to unit2 (if value is entered, convert to that number of values, else value is 1)
         elif(command == 'toub-convert'):
