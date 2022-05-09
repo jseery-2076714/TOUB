@@ -2,7 +2,7 @@
 # testInsert
 import sys
 import os
-sys.path.append(os.path.abspath("/home/runner/work/TOUB/TOUB/src"))
+sys.path.append(os.path.abspath("../src"))
 from convert import convert, unitSelect, parse
 from sheets import retrieveData
 
