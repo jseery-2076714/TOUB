@@ -2,8 +2,8 @@
 # testInsert
 #import sys
 #import os
-from src.convert import *
-from src.sheets import *
+from ..src.convert import *
+from ..src.sheets import *
 #sys.path.append(os.path.abspath("/home/runner/work/TOUB/TOUB/src"))
 #from convert import convertUnit, unitSelect, parseMessage
 #from sheets import retrieveData
