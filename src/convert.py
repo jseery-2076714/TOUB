@@ -2,11 +2,19 @@ import sheets
 
 ### Coversion code will be written here
 
-def convert(value, unit1, unit2):
-    print("Converting " + str(value) + " " + str(unit1) + " to " + str(unit2))
-    return str(float(sheets.retrieveData(unit1)) * value) + " " + str(unit2)
-    ### get row associated to unit1 from Google Sheets API
-    ### convert based on retreived value
-    ### return conversion
+## Given the value of current, current, and target
+### Return the value in terms of target
+def convert(value, current, target):
+
+    print("Converting " + str(value) + " " + str(current) + " to " + str(target))
+    ### retrieved rows from sheets
+    currentRow = sheets.retrieveData(current)
+    targetRow = sheets.retrieveData(target)
+    ### convert current value to centimeters
+    centimeters = float(currentRow['cm']) * value
+    ### get value in terms of target
+    resultValue = centimeters/float(targetRow['cm'])
+
+    return str(resultValue) + " " + str(target)
 
     

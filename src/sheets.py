@@ -2,6 +2,7 @@ import gspread
 import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 
+### Returns the row of the given unit
 def retrieveData(unit):
     # Set 'Name' column as index 
     # on a Dataframe
@@ -10,7 +11,8 @@ def retrieveData(unit):
     # Using the operator .loc[]
     # to select single row
     result = records.loc[unit]
-    return result['cm']
+    return result
+
 
 def setUpAPI():
     # define the scope
