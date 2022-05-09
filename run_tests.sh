@@ -4,7 +4,10 @@
 
 # sleep 5s
 
-python test/unit_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN"
+echo "Running unit tests"
+pytest
+echo "Running system tests"
+python test/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN"
 # python example_tester.py "$TARGET_ID" "$TESTER_TOKEN" -c "$CHANNEL" -r all
 
 # python example_target_ext_commands.py "$TARGET_TOKEN" TESTING &

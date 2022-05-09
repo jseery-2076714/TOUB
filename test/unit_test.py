@@ -1,41 +1,20 @@
-"""
-A functional demo of all possible test cases. This is the format you will want to use with your testing bot.
-    Run with:
-        python example_tests.py TARGET_NAME TESTER_TOKEN
-"""
-from ast import arguments
-import asyncio
-import sys
-from distest import TestCollector
-from distest import run_dtest_bot
-from discord import Embed, Member, Status
-from distest import TestInterface
-import platform
-
-# The tests themselves
-
-test_collector = TestCollector()
-created_channel = None
+# Database/Google Sheets API/backend processing tests
+# testInsert
+from src.convert import convert, unitSelect, parse
+from src.sheets import retrieveData
 
 
-@test_collector()
-async def test_hello(interface):
-    await interface.assert_reply_equals("$hello", "Hello!")
-
-# Write tests for the bot 
-
-# Non SI to SI
-# 1 inch to 2.54 cm
-@test_collector()
-async def test_nonSI_to_SI(interface):
-    await interface.assert_reply_equals("!toub-convert 1 in cm", "2.54 cm")
+def test_retrieve():
+    assert retrieveData('cm') == "Centimeter, 1, 1, 1"
 
 
-# Actually run the bot
+def test_convert():
+    assert convert('1', 'inch', 'cm') == '2.54 cm'
 
-if __name__ == "__main__":
-    
-    if platform.system() == 'Windows':
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    run_dtest_bot(sys.argv, test_collector)
-    
+
+def test_select():
+    assert unitSelect('cm', 1) == 'Randomly selected new unit'
+
+
+def test_parse():
+    assert parse('Message 1 cm') == 'Converted message'
