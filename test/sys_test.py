@@ -28,7 +28,7 @@ async def test_hello(interface):
 # 1 inch to 2.54 cm
 @test_collector()
 async def test_nonSI_to_SI(interface):
-    await interface.assert_reply_equals("!toub-convert 1 in cm", "2.54 cm")
+    await interface.assert_reply_equals("!toub-convert 1 inch cm", "2.54 cm")
 
 
 # Actually run the bot
