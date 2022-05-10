@@ -3,26 +3,22 @@ import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 
-records = pd.DataFrame
+records = pd.DataFrame.from_dict({})
 level = 0
 
-### Returns the row of the given unit
+### Returns the conversions to SI of the given unit
 def retrieveData(unit):
-    # Set 'Name' column as index 
-    # on a Dataframe
-
-    # Using the operator .loc[]
-    # to select single row
-    result = records.loc[records['Unit'] == unit]
-    return result
+    return records.loc[records['Unit'] == unit]
 
 
 def setUpAPI():
+    global records
+    global level
     # define the scope
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
     # add credentials to the account
-    creds = ServiceAccountCredentials.from_json_keyfile_name(os.getcwd() +'/creds.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name(os.getcwd() +'/src/creds.json', scope)
 
     # authorize the clientsheet 
     client = gspread.authorize(creds)
@@ -35,8 +31,6 @@ def setUpAPI():
 
     # get all the records of the data
     records_data = sheet_instance.get_all_records()
-    global records
-    global level
+
     level = 1
     records = pd.DataFrame.from_dict(records_data)
-    # print(records)
