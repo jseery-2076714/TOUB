@@ -1,7 +1,5 @@
 from random import Random
-from src import sheets
-
-
+import sheets
 
 ### Parsing and conversion code will be written here
 
@@ -32,10 +30,15 @@ def parseMessage(message):
 ## Given the value of current, current, and target
 ### Return the value in terms of target
 def convertUnit(value, current, target):
+    if(current == 'cm'):
+        current = 'centimeters'
+    if(target == 'cm'):
+        target = 'centimeters'
     print("Converting " + str(value) + " " + str(current) + " to " + str(target))
     ### retrieved rows from sheets
     currentRow = sheets.retrieveData(current)
     targetRow = sheets.retrieveData(target)
+    print(targetRow)
     ### convert current value to centimeters
     centimeters = float(currentRow['cm']) * value
     ### get value in terms of target
