@@ -34,7 +34,7 @@ def main():
             f'{guild.name}(id: {guild.id})'
         )
         print('We have logged in as {0.user}'.format(client))
-        sheets.setUpAPI()
+        sheets.set_up_api()
 
     @client.event
     async def on_message(message):
@@ -57,6 +57,7 @@ def main():
             if(command == 'toub-help'):
                 await message.channel.send('!toub-list : display all units\n'
                 + '!toub-list-r : display all units with ratios to SI\n'
+                + '!toub-level : show what level toub is on\n'
                 + '!toub-level [level] : change the bot function to desired level of TOUB (1, 2, or 3)\n'
                 + '!toub-convert [value] [unit1] [unit2] : converts a value in unit1 to its value in unit2\n'
                 + '!toub-convert [unit1] [unit2] : converts 1 unit in unit1 to its value in unit2\n'
@@ -66,24 +67,52 @@ def main():
             elif('toub-list' in command):
                 ### lists units with ratios to SI
                 if('-r' in command):
-                    print('display all units in SI')
-                
+                    await message.channel.send('Unit:   SI(cm):\n'
+                    + 'inch    2.54\n'
+                    + 'feet    30.48\n'
+                    + 'yard    91.44\n'
+                    + 'mile    160934.4\n'
+                    + 'furlong 20116.8\n'
+                    + '\n'
+                    + 'Unit:   SI(cm^3):\n'
+                    + 'pint    473.176\n'
+                    + 'quart   946.352\n'
+                    + 'cup     236.588\n')
+
                 else:
-                    print(print('display all units'))
+                    ### will change this to a bunch of random units, once we have those
+                    await message.channel.send('Unit:   SI(cm):\n'
+                    + 'inch    2.54\n'
+                    + 'feet    30.48\n'
+                    + 'yard    91.44\n'
+                    + 'mile    160934.4\n'
+                    + 'furlong 20116.8\n'
+                    + '\n'
+                    + 'Unit:   SI(cm^3):\n'
+                    + 'pint    473.176\n'
+                    + 'quart   946.352\n'
+                    + 'cup     236.588\n')
             
             ### changes the level of the bot
             ### options (1, 2, 3)
             elif('toub-level' in command):
+                templevel = float(input[1])
+                print(str(templevel))
                 ### change to level 1
-                if(command == 'toub-level 1'):
+                if(templevel == 1.0):
                     sheets.level = 1
+                    await message.channel.send('Current level: ' + str(sheets.level))
                 ### change to level 2
-                elif(command == 'toub-level 2'):
+                elif(templevel == 2.0):
                     sheets.level = 2
+                    await message.channel.send('Current level: ' + str(sheets.level))
                 ### change to level 3
-                elif (command == 'toub-level 3'):
+                elif (templevel == 3.0):
                     sheets.level = 3
+                    await message.channel.send('Current level: ' + str(sheets.level))
                 ### Not a valid level
+                elif (command == 'toub-level'):
+                    await message.channel.send('Current level: ' + str(sheets.level))
                 else :
                     sheets.level = 1
                     await message.channel.send('Not a valid level. Default to level 1')

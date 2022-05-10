@@ -1,7 +1,5 @@
-from random import Random
-from src import sheets
-
-
+import random as rd
+import sheets
 
 ### Parsing and conversion code will be written here
 
@@ -32,29 +30,20 @@ def parseMessage(message):
 ## Given the value of current, current, and target
 ### Return the value in terms of target
 def convertUnit(value, current, target):
-    print("Converting " + str(value) + " " + str(current) + " to " + str(target))
     ### retrieved rows from sheets
-    currentRow = sheets.retrieveData(current)
-    targetRow = sheets.retrieveData(target)
-    ### convert current value to centimeters
-    centimeters = float(currentRow['cm']) * value
-    ### get value in terms of target
-    resultValue = centimeters / float(targetRow['cm'])
-    return str(resultValue) + " " + str(target)
+    cv = float(sheets.get_data(current)[1])
+    tv = float(sheets.get_data(target)[1])
+    return str(value * cv/tv) + " " + str(target)
 
 
 # Given the current unit and bot level of chaos
 # Return randomly selected unit from sheet
 def unitSelect(unit, level):
-    # Randomly select new unit from sheet depending on level of chaos
-    rand = Random()
-    units = sheets.records['Unit'].tolist()
-    foundUnit = True
-    while(foundUnit):
-        index = rand.randint(0, 8)
-        if(unit != units[index]):
-            return units[index]
-        else:
-            break
-
-    return "centimeter"
+    # get possible units
+    units = sheets.get_col('unit')
+    # pick one
+    newUnit = rd.choice(units)
+    # if it is the same unit, pick a new one
+    while (newUnit == unit):
+        newUnit = rd.choice(units)
+    return newUnit
