@@ -18,7 +18,7 @@ def main():
 
 
 def prompt():
-    print('Type "play" to test your smarts on unit conversion or be lame and type "exit" to leave the game')
+    return 'Test your unit conversion smarts with this fun minigame. Use the reactions to pick the correct option'
 
 def proc_input(input):
     # error checking
@@ -69,39 +69,43 @@ def game_func1():
 
     # random not the unit above
     # generate 4 other relevant options
-    option = ['a', 'b', 'c', 'd']
+    option = ['1', '2', '3', '4']
     newOpt = rd.choice(option)
     rem_options = list(set(option).difference(set(newOpt)))
     #print(rem_options)
     
     correctAns = gen_ans(randomUnitNum, randomDimNum, randomNum) 
 
-    print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
+    #print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
     randGen1 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen2 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen3 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     key_value = {newOpt: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
     
+    returner = "What is " + str(randomNum)+ " " + randomUnit + " equal to? \n"
     for x in sorted (key_value):
-        print(x + ") " + key_value[x])   
-    # print(newOpt + ")  " + correctAns)
-    # print(rem_options[0] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
-    # print(rem_options[1] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
-    # print(rem_options[2] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
+        returner += x + ") " + key_value[x]  + "\n"
+    return returner  
 
-    inp = ''
-    while not (inp == newOpt): 
-        inp = input()
-        if(inp == newOpt):
-            print("Correct! Aren't you so smart")
-        elif(inp == 'exit'):
-            break  
-        elif(inp != newOpt):
-            print("You suck, try again")
-            
-            print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
-            for x in sorted (key_value):
-                print(x + ") " + key_value[x])   
+def game_won():
+        return ("Correct! Aren't you so smart")
+
+
+
+    
+
+    # inp = ''
+    # while not (inp == newOpt): 
+    #     inp = input()
+    #     if(inp == newOpt):
+    #         print ("Correct! Aren't you so smart")
+    #     elif(inp == 'exit'):
+    #         break  
+    #     elif(inp != newOpt):
+    #         print("You suck, try again")
+    #         print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
+    #         for x in sorted (key_value):
+    #             print(x + ") " + key_value[x])   
             
 if __name__ == "__main__":
     main()

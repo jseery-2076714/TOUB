@@ -2,8 +2,9 @@ import discord
 import os
 from convert import convertUnit, parseMessage
 import sheets
-
+import mini_game as mg
 from dotenv import load_dotenv
+
 
 ### installing setup
 ### pip install discord.py
@@ -45,7 +46,7 @@ def main():
         ### Base case
         elif message.content.startswith('$hello'):
             await message.channel.send('Hello!')
-        
+           
         ### Checking for specific toub commands
         elif message.content.startswith('!'):
             input = message.content.lower().split(' ')
@@ -107,16 +108,12 @@ def main():
 
             ### minigame
             elif(command == 'toub-minigame'):
-                print('Choose the best conversion')
-                print('Option 1')
-                print('Option 2')
-                print('Option 3')
-                print('Option 4')
-                if message.author == client.user:
-                    await message.add_reaction('U+0031 U+FE0F U+20E3')
-                    await message.add_reaction('U+0032 U+FE0F U+20E3')
-                    await message.add_reaction('U+0033 U+FE0F U+20E3')
-                    await message.add_reaction('U+0034 U+FE0F U+20E3')
+                await message.channel.send(mg.prompt())
+                msg = await message.channel.send(mg.game_func1())
+                await msg.add_reaction('1️⃣')    
+                await msg.add_reaction('2️⃣')  
+                await msg.add_reaction('3️⃣')    
+                await msg.add_reaction('4️⃣')  
 
         else:
             parsed = parseMessage(message.content)
@@ -125,8 +122,11 @@ def main():
             else:
                 await message.channel.send(parseMessage(message.content))
 
-            
-
+    @client.event
+    async def on_reaction_add(reaction, user):
+        if user != client.user:
+            if str(reaction.emoji) == '1️⃣':
+                await reaction.message.channel.send (mg.game_won())
 
     ''' Proposed Design Features - commands are headed with “!toub-”
     Default:
