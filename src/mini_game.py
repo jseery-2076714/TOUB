@@ -77,10 +77,17 @@ def game_func1():
     correctAns = gen_ans(randomUnitNum, randomDimNum, randomNum) 
 
     print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
-    print(newOpt + ")  " + correctAns)
-    print(rem_options[0] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
-    print(rem_options[1] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
-    print(rem_options[2] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
+    randGen1 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
+    randGen2 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
+    randGen3 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
+    key_value = {newOpt: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
+    
+    for x in sorted (key_value):
+        print(x + ") " + key_value[x])   
+    # print(newOpt + ")  " + correctAns)
+    # print(rem_options[0] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
+    # print(rem_options[1] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
+    # print(rem_options[2] + ")  " + gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum))
 
     inp = ''
     while not (inp == newOpt): 
@@ -93,10 +100,8 @@ def game_func1():
             print("You suck, try again")
             
             print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
-            print(newOpt + ")  " + correctAns)
-            print(rem_options[0] + ")  " + gen_rand_wrong_ans(randomNum))
-            print(rem_options[1] + ")  " + gen_rand_wrong_ans(randomNum))
-            print(rem_options[2] + ")  " + gen_rand_wrong_ans(randomNum))
+            for x in sorted (key_value):
+                print(x + ") " + key_value[x])   
             
 if __name__ == "__main__":
     main()
