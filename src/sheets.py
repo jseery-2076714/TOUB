@@ -11,6 +11,10 @@ level = 0
 def get_columns():
     return records.columns.to_list()
 
+# Returns the column with colname
+def get_col(colname):
+    return records[colname]
+
 # Returns the information and conversions of the unit as a list
 def get_data(unit):
     return records.loc[records['unit'] == unit].values.flatten().tolist()
