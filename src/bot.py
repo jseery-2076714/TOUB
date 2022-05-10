@@ -15,8 +15,10 @@ from dotenv import load_dotenv
 ### pip install --upgrade google-api-python-client oauth2client 
 def main():
     load_dotenv()
-    TOKEN = os.getenv('DISCORD_TOKEN')
-    SERVER = os.getenv('DISCORD_SERVER')
+    TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.G6sluc' +  '.1eJE5gh2BdyJcTHc_JHPcZe0QgEkQIepQqWNYM'
+    #TOKEN = os.getenv('DISCORD_TOKEN')
+    SERVER = 'TOUB'
+    #SERVER = os.getenv('DISCORD_SERVER')
     client = discord.Client()
 
 

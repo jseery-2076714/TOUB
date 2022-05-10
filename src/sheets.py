@@ -3,8 +3,8 @@ import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 
-records = None
-level = None
+records = pd.DataFrame
+level = 0
 
 ### Returns the row of the given unit
 def retrieveData(unit):
@@ -22,7 +22,7 @@ def setUpAPI():
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
     # add credentials to the account
-    creds = ServiceAccountCredentials.from_json_keyfile_name(os.getcwd() +'/src/creds.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name(os.getcwd() +'/creds.json', scope)
 
     # authorize the clientsheet 
     client = gspread.authorize(creds)
