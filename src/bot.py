@@ -14,9 +14,10 @@ from dotenv import load_dotenv
 ### install google sheets api stuff:
 ### pip install gspread
 ### pip install --upgrade google-api-python-client oauth2client 
+
 def main():
     load_dotenv()
-    TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.G6sluc' +  '.1eJE5gh2BdyJcTHc_JHPcZe0QgEkQIepQqWNYM'
+    TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GtAYtn.ZHz80KoS7QtKDeZt0g8OWjzzGQ3fQTxfUfzDOY'
     #TOKEN = os.getenv('DISCORD_TOKEN')
     SERVER = 'TOUB'
     #SERVER = os.getenv('DISCORD_SERVER')
@@ -41,7 +42,6 @@ def main():
         ### check if bot sends the message, do nothing
         if message.author == client.user:
             return
-
 
         ### Base case
         elif message.content.startswith('$hello'):
@@ -96,8 +96,10 @@ def main():
             ### changes the level of the bot
             ### options (1, 2, 3)
             elif('toub-level' in command):
+                if(not message.author.guild_permissions.administrator):
+                    await message.channel.send("You don't have permission to change the level!")
+                    return
                 templevel = float(input[1])
-                print(str(templevel))
                 ### change to level 1
                 if(templevel == 1.0):
                     sheets.level = 1
@@ -124,9 +126,6 @@ def main():
                     value = float(input[1])
                     firstUnit = input[2]
                     secondUnit = input[3]
-                    print(value)
-                    print(firstUnit)
-                    print(secondUnit)
                     result = convertUnit(value, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                 except ValueError:
