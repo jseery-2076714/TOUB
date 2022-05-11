@@ -13,30 +13,34 @@
 
 ### 3. Plans and Goals for Following Week
 
-- Front End: Finish parsing all commands and giving correct responses to these commands.
-- Back End: Finish developing the bot to work with all three level, and have most of the functionality set up for the minigame
+- Frontend: Parse commands more smoothly. Right now the code is super choppy and inefficient. 
+-Backend: Finish developing the bot to work with all three levels. Finish minigame.
+- Testing: Get the CI tests to run smoothly.
 
 ## Contributions of individual team members
 
 ### 1. Action Items from last meeting
+- Abby : Get Level 1 of TOUB to work with the Bot. Add help command to show user what to do
+- Tu: Add more tests. Work on the data and conversions
+- Tim: Get Level 1 of TOUB to work with the Bot
+- Jack: Add more tests. Work on the data and conversions. Maintain GitHub repo and CI functionality
+- Samuel: Add functionality to the game, i.e. add counter, and be able to type responses into a box. Hopefully be able to integrate level 1 into mini game. 
 
-- Abby will finish building a practice discord bot. 
-- Samuel will create the file to store all the data and put all the data in it so it can be used with the discord bot. Try and start building the mini game. 
-- Timothy will begin setting up the basic structure for TOUB discord bot with skeleton code
-- Jack will continue maintaining the git repo with our progressive changes and start helping set up the discord bot, while continuing to research how to integrate the bot with our stored data
 
 ### 2. Progress and Issues
 
-- Abby: Added functionality to bot 
-- Tu: Wrote tests
-- Tim: Added functionality to bot & integrated distest ot the bot
-- Jack: Worked on writing tests, setup GitHub Actions CI service
-- Samuel: Started creating the mini game. Window pops up with correct name. 
+- Abby: Finished help and list commands. Worked on level 1 of conversion.
+- Tu: Worked on mini game.
+- Tim: Added functionality to bot. Worked on levels of conversion. 
+- Jack: Worked on writing tests, setup GitHub Actions CI service. Worked on the google sheets API.
+- Samuel: Worked on minigame.
+
 
 ### 3. Plans and Goals for Following Week
 
-- Abby: Get Level 1 of TOUB to work with the Bot. Add help command to show user what to do
-- Tu: Add more tests. Work on data conversions
-- Tim: Get Level 1 of TOUB to work with the Bot
-- Jack: Add more tests, Work on the data and conversions, Maintain GitHub repo and CI functionality
-- Samuel: Add functionality to the game, i.e. add counter, and be able to type responses into a box. Hopefully be able to integrate level 1 into mini game. 
+- Abby: Clean up the help commands. Add the list of all random units. Work on level 2 and 3 of conversion.
+- Tu: Finish minigame and testing.
+- Tim: Work on level 2 and 3 of conversion.
+- Jack: Add more tests. Maintain GitHub repo and CI functionality
+- Samuel: Finish minigame
+
