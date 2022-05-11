@@ -32,7 +32,7 @@
 - Abby: Finished help and list commands. Worked on level 1 of conversion.
 - Tu: Worked on mini game.
 - Tim: Added functionality to bot. Worked on levels of conversion. 
-- Jack: Worked on writing tests, setup GitHub Actions CI service. Worked on the google sheets API.
+- Jack: Worked on fixing existing tests, setup GitHub Actions CI service and fixed token issue. Worked on the google sheets API.
 - Samuel: Worked on minigame.
 
 
@@ -41,6 +41,6 @@
 - Abby: Clean up the help commands. Add the list of all random units. Work on level 2 and 3 of conversion.
 - Tu: Finish minigame and testing.
 - Tim: Work on level 2 and 3 of conversion.
-- Jack: Add more tests. Maintain GitHub repo and CI functionality
+- Jack: Figure out issues with running bot locally vs on GitHub. Maintain GitHub repo and CI functionality, write better documentation.
 - Samuel: Finish minigame
 
