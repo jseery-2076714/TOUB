@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-# python example_target.py "$TARGET_TOKEN" &
-
-# sleep 5s
-TOKEN1='OTcwNTA5NjMzMTc5NDkyMzkz.G6sluc'
-TOKEN2='.1eJE5gh2BdyJcTHc_JHPcZe0QgEkQIepQqWNYM'
+TOKEN1='OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.'
+TOKEN2='F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
 TESTER_TOKEN1='OTcwNTI4MTAyODEzOTQ5OTky.'
 TESTER_TOKEN2='Ym9Quw.qIXzCZQpin9a-fPbfvHWwiMFwrw'
 echo "Decrypting token"
@@ -15,10 +12,3 @@ pytest
 echo "Running system tests"
 python src/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
 rm ./src/.env
-# python example_tester.py "$TARGET_ID" "$TESTER_TOKEN" -c "$CHANNEL" -r all
-
-# python example_target_ext_commands.py "$TARGET_TOKEN" TESTING &
-
-# sleep 5s
-
-# python example_tester_ext_commands.py "$TARGET_ID" "$TESTER_TOKEN" -c "$CHANNEL" 

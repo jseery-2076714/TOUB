@@ -1,3 +1,5 @@
+# Discord bot handling and message processing
+import sys
 import discord
 import os
 from convert import convertUnit, parseMessage
@@ -6,18 +8,10 @@ import mini_game as mg
 from dotenv import load_dotenv
 
 
-### installing setup
-### pip install discord.py
-### pip install distest
-### pip install -U pytest
-
-### install google sheets api stuff:
-### pip install gspread
-### pip install --upgrade google-api-python-client oauth2client 
-
 def main():
     load_dotenv()
-    TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GtAYtn.ZHz80KoS7QtKDeZt0g8OWjzzGQ3fQTxfUfzDOY'
+    print(sys.path)
+    TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.' + 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
     #TOKEN = os.getenv('DISCORD_TOKEN')
     SERVER = 'TOUB'
     #SERVER = os.getenv('DISCORD_SERVER')
@@ -156,21 +150,8 @@ def main():
             if str(reaction.emoji) == '1️⃣':
                 await reaction.message.channel.send (mg.game_won())
 
-    ''' Proposed Design Features - commands are headed with “!toub-”
-    Default:
-    “help” - lists all the commands/formats
-    “list” - lists all the units
-        “-r” - lists units with ratios to SI
-    “convert [unit1] [unit2]” - converts from unit1 to unit2 
-    “Add [unitname] [SI conversion] - adds a custom unit
-    “profile” - users have profiles?
-    Game:
-    “game-help” - details how the game is played
-    “game-play” - starts a game instance
-    “game-guess [guess]” - users guesses unit conversion 
-    '''
-
     client.run(TOKEN)
+
 
 if __name__ == "__main__":
     main()

@@ -12,7 +12,6 @@ from discord import Embed, Member, Status
 from distest import TestInterface
 import platform
 
-# The tests themselves
 
 test_collector = TestCollector()
 created_channel = None

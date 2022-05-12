@@ -1,16 +1,10 @@
 # Database/Google Sheets API/backend processing tests
-# testInsert
-#import sys
-#import os
-#sys.path.append(os.path.abspath("/home/runner/work/TOUB/TOUB/src"))
-#from convert import convertUnit, unitSelect, parseMessage
-#from sheets import retrieveData
 from src import sheets
 from src import convert
 
 
 def test_retrieve():
-    assert sheets.retrieveData('cm') == "Centimeter, 1, 1, 1"
+    assert sheets.get_data('cm') == "Centimeter, 1, 1, 1"
 
 
 def test_convert():
