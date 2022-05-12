@@ -9,11 +9,17 @@ from dotenv import load_dotenv
 
 
 def main():
-    load_dotenv()
-    TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.' + 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
-    #TOKEN = os.getenv('DISCORD_TOKEN')
-    SERVER = 'TOUB'
-    #SERVER = os.getenv('DISCORD_SERVER')
+    TOKEN = ''
+    SERVER = ''
+    # check if bot is running on GitHub or locally
+    if '/home/runner/work/TOUB/TOUB' in sys.path:
+        load_dotenv()
+        TOKEN = os.getenv('DISCORD_TOKEN')
+        SERVER = os.getenv('DISCORD_SERVER')
+    else:
+        TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.' + 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
+        SERVER = 'TOUB'
+
     client = discord.Client()
 
 

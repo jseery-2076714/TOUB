@@ -42,9 +42,16 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Run Tests
       run: |
-        ./run_tests.sh
+        echo "Decrypting token"
+        echo 'DISCORD_TOKEN='$TOKEN1$TOKEN2 > ./src/.env
+        echo 'DISCORD_SERVER=TOUB' >> ./src/.env
+        python bot.py & (./run_tests.sh && rm ./src/.env) && kill 0
       env:
           TARGET_ID: "970509633179492393"
           CHANNEL: "970505630026694707"
+          TOKEN1: 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.'
+          TOKEN2: 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
+          TESTER_TOKEN1: 'OTcwNTI4MTAyODEzOTQ5OTky.'
+          TESTER_TOKEN2: 'Ym9Quw.qIXzCZQpin9a-fPbfvHWwiMFwrw'
           # TESTER_TOKEN: ${{ secrets.TESTER_TOKEN }}
           # TARGET_TOKEN: ${{ secrets.TARGET_TOKEN }}
