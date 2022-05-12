@@ -6,7 +6,7 @@ from src import convert
 
 
 def test_retrieve():
-    print(sys.path)
+    assert sys.path == ''
     assert sheets.get_data('cm') == "Centimeter, 1, 1, 1"
 
 
