@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 
 def main():
     load_dotenv()
-    print(sys.path)
     TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.' + 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
     #TOKEN = os.getenv('DISCORD_TOKEN')
     SERVER = 'TOUB'

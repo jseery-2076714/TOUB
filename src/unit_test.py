@@ -1,9 +1,12 @@
 # Database/Google Sheets API/backend processing tests
+import sys
+
 from src import sheets
 from src import convert
 
 
 def test_retrieve():
+    print(sys.path)
     assert sheets.get_data('cm') == "Centimeter, 1, 1, 1"
 
 
