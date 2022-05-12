@@ -1,6 +1,4 @@
 # Database/Google Sheets API/backend processing tests
-import sys
-
 from src import sheets
 from src import convert
 

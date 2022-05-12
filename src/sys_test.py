@@ -12,7 +12,6 @@ from discord import Embed, Member, Status
 from distest import TestInterface
 import platform
 
-
 test_collector = TestCollector()
 created_channel = None
 
@@ -21,7 +20,8 @@ created_channel = None
 async def test_hello(interface):
     await interface.assert_reply_equals("$hello", "Hello!")
 
-# Write tests for the bot 
+
+# Write tests for the bot
 
 # Non SI to SI
 # 1 inch to 2.54 cm
@@ -33,8 +33,7 @@ async def test_nonSI_to_SI(interface):
 # Actually run the bot
 
 if __name__ == "__main__":
-    
+
     if platform.system() == 'Windows':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     run_dtest_bot(sys.argv, test_collector)
-    

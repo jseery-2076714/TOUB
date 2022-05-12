@@ -45,7 +45,7 @@ jobs:
         echo "Decrypting token"
         echo 'DISCORD_TOKEN='$TOKEN1$TOKEN2 > ./src/.env
         echo 'DISCORD_SERVER=TOUB' >> ./src/.env
-        python bot.py & (./run_tests.sh && rm ./src/.env) && kill 0
+        python ./src/bot.py & (./run_tests.sh && rm ./src/.env) && kill 0
       env:
           TARGET_ID: "970509633179492393"
           CHANNEL: "970505630026694707"
