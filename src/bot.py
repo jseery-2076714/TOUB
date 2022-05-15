@@ -133,12 +133,12 @@ def main():
                     value = float(input[1])
                     firstUnit = input[2]
                     secondUnit = input[3]
-                    result = convertUnit(value, firstUnit, secondUnit)
+                    result = convert.convertUnit(value, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                 except ValueError:
                     firstUnit = input[1]
                     secondUnit = input[2]
-                    result = convertUnit(1, firstUnit, secondUnit)
+                    result = convert.convertUnit(1, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
 
             ### minigame
@@ -151,11 +151,11 @@ def main():
                 await msg.add_reaction('4️⃣')  
 
         else:
-            parsed = parseMessage(message.content)
+            parsed = convert.parseMessage(message.content)
             if(parsed == message.content):
                 return
             else:
-                await message.channel.send(parseMessage(message.content))
+                await message.channel.send(convert.parseMessage(message.content))
 
     @client.event
     async def on_reaction_add(reaction, user):
