@@ -4,18 +4,8 @@ import numpy as np
 import random as rd
 
 
-data_file = 'data/data_toub_conv.csv'
+data_file = 'src/data/data_toub_conv.csv'
 data = pd.read_csv(data_file)
-
-
-def main():
-    userInput = ''
-    prompt()
-   
-    while not(userInput == 'exit'):
-        userInput = input()
-        proc_input(userInput)
-
 
 def prompt():
     return 'Test your unit conversion smarts with this fun minigame. Use the reactions to pick the correct option'
@@ -96,6 +86,7 @@ def game_rightChoice():
 def game_won():
         return ("Correct! Aren't you so smart")
 
+<<<<<<< HEAD:src/mini_game.py
     # inp = ''
     # while not (inp == newOpt): 
     #     inp = input()
@@ -112,5 +103,7 @@ def game_won():
 if __name__ == "__main__":
     main()
 
+=======
+>>>>>>> f55242acbc665474276a1c4a8200c054ddf2a8fb:modules/mini_game.py
 
 

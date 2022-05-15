@@ -36,20 +36,20 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Decrypt Token
       run: |
-        echo 'DISCORD_TOKEN='$TOKEN1$TOKEN2 > src/.env
-        echo 'DISCORD_SERVER=TOUB' >> src/.env
+        echo 'DISCORD_TOKEN='$TOKEN1$TOKEN2 > .env
+        echo 'DISCORD_SERVER=TOUB' >> .env
       env:
         TOKEN1: 'OTcwNTA5NjMzMTc5NDkyMzkz.GtSges.'
         TOKEN2: 'H2lCnOWQ2zImGhEk2v_bqQIiW07j9-2YNN3z00'
     - name: Run Tests
       run: |
-        echo "Running main bot"
-        python src/bot.py &
         echo "Running unit tests"
         pytest
+        echo "Running main bot"
+        python src/bot.py &
         echo "Running system tests"
-        python src/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
-        rm src/.env
+        python test/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
+        rm .env
         jobs
       env:
         TARGET_ID: "970509633179492393"

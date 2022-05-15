@@ -2,11 +2,18 @@
 import sys
 import discord
 import os
-from src.convert import convertUnit, parseMessage
-from src import sheets
-from src import mini_game as mg
 from dotenv import load_dotenv
-
+import importlib, importlib.util
+ 
+def module_directory(name_module, path):
+    P = importlib.util.spec_from_file_location(name_module, path)
+    import_module = importlib.util.module_from_spec(P)
+    P.loader.exec_module(import_module)
+    return import_module
+ 
+sheets = module_directory("result", "./modules/sheets.py")
+convert = module_directory("result", "./modules/convert.py")
+mg = module_directory("result", "./modules/mini_game.py")
 
 def main():
     TOKEN = ''
@@ -35,7 +42,6 @@ def main():
             f'{guild.name}(id: {guild.id})'
         )
         print('We have logged in as {0.user}'.format(client))
-        sheets.set_up_api()
 
     @client.event
     async def on_message(message):
@@ -126,12 +132,12 @@ def main():
                     value = float(input[1])
                     firstUnit = input[2]
                     secondUnit = input[3]
-                    result = convertUnit(value, firstUnit, secondUnit)
+                    result = convert.convert_unit(value, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                 except ValueError:
                     firstUnit = input[1]
                     secondUnit = input[2]
-                    result = convertUnit(1, firstUnit, secondUnit)
+                    result = convert.convert_unit(1, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
 
             ### minigame
@@ -144,11 +150,11 @@ def main():
                 await msg.add_reaction('4️⃣')  
 
         else:
-            parsed = parseMessage(message.content)
+            parsed = convert.parse_message(message.content)
             if(parsed == message.content):
                 return
             else:
-                await message.channel.send(parseMessage(message.content))
+                await message.channel.send(convert.parse_message(message.content))
 
     @client.event
     async def on_reaction_add(reaction, user):
