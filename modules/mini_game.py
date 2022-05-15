@@ -7,16 +7,6 @@ import random as rd
 data_file = 'src/data/data_toub_conv.csv'
 data = pd.read_csv(data_file)
 
-
-def main():
-    userInput = ''
-    prompt()
-   
-    while not(userInput == 'exit'):
-        userInput = input()
-        proc_input(userInput)
-
-
 def prompt():
     return 'Test your unit conversion smarts with this fun minigame. Use the reactions to pick the correct option'
 
@@ -89,26 +79,6 @@ def game_func1():
 
 def game_won():
         return ("Correct! Aren't you so smart")
-
-
-
-    
-
-    # inp = ''
-    # while not (inp == newOpt): 
-    #     inp = input()
-    #     if(inp == newOpt):
-    #         print ("Correct! Aren't you so smart")
-    #     elif(inp == 'exit'):
-    #         break  
-    #     elif(inp != newOpt):
-    #         print("You suck, try again")
-    #         print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
-    #         for x in sorted (key_value):
-    #             print(x + ") " + key_value[x])   
-            
-if __name__ == "__main__":
-    main()
 
 
 

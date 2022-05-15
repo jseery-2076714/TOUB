@@ -17,10 +17,16 @@ user_manual.txt (User Manual)
 developer_guidelines.txt (guidelines for those who are developing TOUB)
 
 How to build the software:
-I HAVE NO IDEA :)
+Ensure you have at least Python version 3.10 installed, change your current directory to the TOUB root directory, and run the following command to install
+all dependencies:`python -m pip install -r requirements.txt`
 
 How to test the software:
-Run run_tests.sh
+To build and test the source code for TOUB the first time, ensure you have at least Python version 3.10 installed, change your current directory to the
+TOUB root directory, and run the following command to install all dependencies: `python -m pip install -r requirements.txt`
+Then run the command `pytest` from the shell to run the unit tests. To run the system tests, first run the main bot using the command `python bot.py`, then
+run the command `python src/sys_test.py -c "<Discord channel ID>" -r all "<target bot ID>" "<tester bot token>"`
+When pushing to the repo, our CI system (GitHub Actions) runs the python-app.yml script on the GitHub servers, which installs all dependencies and runs the
+test scripts automatically.
 
 How to add new tests:
 Add tests to either sys_test.py or unit_test.py depending on what you want to test.
@@ -28,3 +34,5 @@ Add to sys_test.py for tests that test the discord bot functionality.
 Add to unit_test.py for tests that only test our backend. 
 
 How to build a release of the software:
+Ensure you have at least Python version 3.10 installed, change your current directory to the TOUB root directory, and run the following command to install
+all dependencies:`python -m pip install -r requirements.txt`
