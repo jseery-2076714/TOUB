@@ -34,11 +34,10 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Decrypting Token
+    - name: Decrypt Token
       run: |
         echo 'DISCORD_TOKEN='$TOKEN1$TOKEN2 > src/.env
         echo 'DISCORD_SERVER=TOUB' >> src/.env
-        cat src/.env
       env:
         TOKEN1: 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.'
         TOKEN2: 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
@@ -47,11 +46,11 @@ jobs:
         echo "Running main bot"
         python src/bot.py &
         echo "Running unit tests"
+        jobs
         pytest
         echo "Running system tests"
         python src/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
         rm src/.env
-        jobs
       env:
         TARGET_ID: "970509633179492393"
         CHANNEL: "970505630026694707"

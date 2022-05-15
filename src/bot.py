@@ -2,9 +2,9 @@
 import sys
 import discord
 import os
-from convert import convertUnit, parseMessage
-import sheets
-import mini_game as mg
+from src.convert import convertUnit, parseMessage
+from src import sheets
+from src import mini_game as mg
 from dotenv import load_dotenv
 
 

@@ -1,6 +1,6 @@
 # Parsing and conversion
 import random as rd
-import sheets
+from src import sheets
 
 # Given a message from Discord
 # Return converted message

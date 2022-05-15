@@ -1,4 +1,5 @@
 flake8
+discord.py
 pytest
 distest
 distest-check
