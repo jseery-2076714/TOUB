@@ -4,7 +4,7 @@ import numpy as np
 import random as rd
 
 
-data_file = 'src/data/data_toub_conv.csv'
+data_file = 'data/data_toub_conv.csv'
 data = pd.read_csv(data_file)
 
 

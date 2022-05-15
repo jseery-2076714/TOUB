@@ -18,7 +18,7 @@ def main():
         TOKEN = os.getenv('DISCORD_TOKEN')
         SERVER = os.getenv('DISCORD_SERVER')
     else:
-        TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.' + 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
+        TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GtSges.' + 'H2lCnOWQ2zImGhEk2v_bqQIiW07j9-2YNN3z00'
         SERVER = 'TOUB'
 
     client = discord.Client()
