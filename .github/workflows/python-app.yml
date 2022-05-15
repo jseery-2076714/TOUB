@@ -49,6 +49,7 @@ jobs:
     needs: build
     steps:
       - timeout-minutes: 2
+      - uses: actions/checkout@v3
       - name: Run Tests
         env:
           TARGET_ID: "970509633179492393"
