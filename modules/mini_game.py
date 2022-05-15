@@ -62,15 +62,15 @@ def game_func1():
     # random not the unit above
     # generate 4 other relevant options
     option = ['1', '2', '3', '4']
-    # correctChoice = rd.choice(option)
-    rem_options = list(set(option).difference(set(game_rightChoice())))
+    correctChoice = rightChoice()
+    rem_options = list(set(option).difference(set(correctChoice)))
 
     correctAns = gen_ans(randomUnitNum, randomDimNum, randomNum) 
 
     randGen1 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen2 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen3 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
-    key_value = {game_rightChoice(): correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
+    key_value = {correctChoice: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
     
     returner = "What is " + str(randomNum)+ " " + randomUnit + " equal to? \n"
     for x in sorted (key_value):
@@ -78,7 +78,7 @@ def game_func1():
     return returner  
 
 
-def game_rightChoice():
+def rightChoice():
     option = ['1', '2', '3', '4']
     correctChoice = rd.choice(option)
     return correctChoice
@@ -86,24 +86,5 @@ def game_rightChoice():
 def game_won():
         return ("Correct! Aren't you so smart")
 
-<<<<<<< HEAD:src/mini_game.py
-    # inp = ''
-    # while not (inp == newOpt): 
-    #     inp = input()
-    #     if(inp == newOpt):
-    #         print ("Correct! Aren't you so smart")
-    #     elif(inp == 'exit'):
-    #         break  
-    #     elif(inp != newOpt):
-    #         print("You suck, try again")
-    #         print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
-    #         for x in sorted (key_value):
-    #             print(x + ") " + key_value[x])   
-            
-if __name__ == "__main__":
-    main()
-
-=======
->>>>>>> f55242acbc665474276a1c4a8200c054ddf2a8fb:modules/mini_game.py
 
 
