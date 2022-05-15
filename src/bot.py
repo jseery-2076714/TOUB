@@ -167,6 +167,7 @@ def main():
                 await msg.add_reaction('2️⃣')  
                 await msg.add_reaction('3️⃣')    
                 await msg.add_reaction('4️⃣')  
+                await msg.add_reaction('5️⃣') 
        
         ### not a toub command
         else:
@@ -179,8 +180,17 @@ def main():
     @client.event
     async def on_reaction_add(reaction, user):
         if user != client.user:
-            if str(reaction.emoji) == '1️⃣':
+            if str(reaction.emoji) == '1️⃣' and mg.rightChoice() == 'a':
                 await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '2️⃣' and mg.rightChoice() == 'b':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '3️⃣' and mg.rightChoice() == 'c':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '4️⃣' and mg.rightChoice() == 'd':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '5️⃣' and mg.rightChoice() != 'a' or mg.rightChoice() != 'b' or mg.rightChoice() != 'c' or mg.rightChoice() != 'd' :
+                await reaction.message.channel.send (mg.game_won())
+            
 
     client.run(TOKEN)
 
