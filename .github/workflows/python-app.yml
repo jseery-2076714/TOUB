@@ -43,10 +43,10 @@ jobs:
         TOKEN2: 'H2lCnOWQ2zImGhEk2v_bqQIiW07j9-2YNN3z00'
     - name: Run Tests
       run: |
-        echo "Running main bot"
-        python src/bot.py &
         echo "Running unit tests"
         pytest
+        echo "Running main bot"
+        python src/bot.py &
         echo "Running system tests"
         python test/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
         rm .env
