@@ -1,6 +1,14 @@
 # Parsing and conversion
 import random as rd
-from src import sheets
+import importlib, importlib.util
+ 
+def module_directory(name_module, path):
+    P = importlib.util.spec_from_file_location(name_module, path)
+    import_module = importlib.util.module_from_spec(P)
+    P.loader.exec_module(import_module)
+    return import_module
+ 
+sheets = module_directory("result", "./modules/sheets.py")
 
 # Given a message from Discord
 # Return converted message
