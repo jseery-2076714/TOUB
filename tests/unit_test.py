@@ -7,23 +7,22 @@ def module_directory(name_module, path):
     import_module = importlib.util.module_from_spec(P)
     P.loader.exec_module(import_module)
     return import_module
+ 
+sheets = module_directory("sheets", "./modules/sheets.py")
+convert = module_directory("convert", "./modules/convert.py")
+sheets.set_up_api()
 
-
-sheets = module_directory("result", "./modules/sheets.py")
-convert = module_directory("result", "./modules/convert.py")
-
+def test_retrieve():
+    print(sheets.get_data('feet'))
+    assert sheets.get_data('feet') == ['feet', 30.48, 929.0304, 28316.84659, 'ft']
 
 def test_convert():
-    assert convert.convertUnit('1', 'inch', 'cm') == '2.54 cm'
+    assert convert.convert_unit(1, 'feet', 'yard') == '0.33333333333333337 yard'
 
 
 def test_select():
-    assert convert.unitSelect('cm', 1) == 'Randomly selected new unit'
+    assert convert.unit_select('feet', 1) != 'feet'
 
 
-def test_parse():
-    assert convert.parseMessage('Message 1 cm') == 'Converted message'
-
-
-def test_retrieve():
-    assert sheets.get_data('Centimeter') == "Centimeter, 1, 1, 1"
+# def test_parse():
+#     assert convert.parse_message('1 feet') == 'Converted message'

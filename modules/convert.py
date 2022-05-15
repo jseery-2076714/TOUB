@@ -7,8 +7,8 @@ def module_directory(name_module, path):
     import_module = importlib.util.module_from_spec(P)
     P.loader.exec_module(import_module)
     return import_module
- 
-sheets = module_directory("result", "./modules/sheets.py")
+
+sheets = module_directory("sheets", "./modules/sheets.py")
 sheets.set_up_api()
 
 # Given a message from Discord

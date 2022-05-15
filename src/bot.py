@@ -11,9 +11,9 @@ def module_directory(name_module, path):
     P.loader.exec_module(import_module)
     return import_module
  
-sheets = module_directory("result", "./modules/sheets.py")
-convert = module_directory("result", "./modules/convert.py")
-mg = module_directory("result", "./modules/mini_game.py")
+sheets = module_directory("sheets", "./modules/sheets.py")
+convert = module_directory("convert", "./modules/convert.py")
+mg = module_directory("mini_game", "./modules/mini_game.py")
 
 def main():
     TOKEN = ''
