@@ -17,43 +17,51 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then
-          pip install -r requirements.txt;
-        fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Decrypting Token
-      run: |
-        echo 'DISCORD_TOKEN='$TOKEN1$TOKEN2 > src/.env
-        echo 'DISCORD_SERVER=TOUB' >> src/.env
-      env:
-        TOKEN1: 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.'
-        TOKEN2: 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
-    - name: Run Tests
-      run: |
-        echo "Running main bot"
-        python src/bot.py &
-        echo "Running unit tests"
-        pytest
-        echo "Running system tests"
-        python src/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
-        rm src/.env
-        jobs
-        kill 0
-      env:
-        TARGET_ID: "970509633179492393"
-        CHANNEL: "970505630026694707"
-        TESTER_TOKEN1: 'OTcwNTI4MTAyODEzOTQ5OTky.'
-        TESTER_TOKEN2: 'Ym9Quw.qIXzCZQpin9a-fPbfvHWwiMFwrw'
+      - timeout-minutes: 3
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt;
+          fi
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Decrypting Token
+        env:
+          TOKEN1: 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.'
+          TOKEN2: 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
+        run: |
+          echo 'DISCORD_TOKEN='$TOKEN1$TOKEN2 > src/.env
+          echo 'DISCORD_SERVER=TOUB' >> src/.env
+
+  test:
+
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - timeout-minutes: 2
+      - name: Run Tests
+        env:
+          TARGET_ID: "970509633179492393"
+          CHANNEL: "970505630026694707"
+          TESTER_TOKEN1: 'OTcwNTI4MTAyODEzOTQ5OTky.'
+          TESTER_TOKEN2: 'Ym9Quw.qIXzCZQpin9a-fPbfvHWwiMFwrw'
+        run: |
+          echo "Running main bot"
+          python src/bot.py &
+          echo "Running unit tests"
+          pytest
+          echo "Running system tests"
+          python src/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
+          rm src/.env
+          jobs
+          kill 0
