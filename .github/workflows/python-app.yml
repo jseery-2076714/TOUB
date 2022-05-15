@@ -15,7 +15,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    timeout-minutes: 3
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -38,6 +38,7 @@ jobs:
       run: |
         echo 'DISCORD_TOKEN='$TOKEN1$TOKEN2 > src/.env
         echo 'DISCORD_SERVER=TOUB' >> src/.env
+        cat src/.env
       env:
         TOKEN1: 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.'
         TOKEN2: 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
@@ -51,7 +52,6 @@ jobs:
         python src/sys_test.py -c "$CHANNEL" -r all "$TARGET_ID" "$TESTER_TOKEN1$TESTER_TOKEN2"
         rm src/.env
         jobs
-        kill 0
       env:
         TARGET_ID: "970509633179492393"
         CHANNEL: "970505630026694707"

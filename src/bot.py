@@ -14,6 +14,7 @@ def main():
     # check if bot is running on GitHub or locally
     if '/home/runner/work/TOUB/TOUB' in sys.path:
         load_dotenv()
+        print("Loading token from .env")
         TOKEN = os.getenv('DISCORD_TOKEN')
         SERVER = os.getenv('DISCORD_SERVER')
     else:
