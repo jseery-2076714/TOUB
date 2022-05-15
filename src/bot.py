@@ -104,6 +104,7 @@ def main():
                     + 'quart   946.352\n'
                     + 'cup     236.588\n')
             
+            
             ### user command: !toub-level [level], !toub-level
             ###             asking TOUB to change the level of the game (1, 2, or 3), or asking TOUB for the current level 
             ### bot output: the current level of the bot
@@ -114,7 +115,7 @@ def main():
                     await message.channel.send("You don't have permission to change the level!")
                     return
                 templevel = float(input[1])
-                ### change to level 1
+                ### change to level 1 
                 if(templevel == 1.0):
                     sheets.level = 1
                     await message.channel.send('Current level: ' + str(sheets.level))
