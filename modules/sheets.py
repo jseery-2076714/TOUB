@@ -6,6 +6,12 @@ from oauth2client.service_account import ServiceAccountCredentials
 records = pd.DataFrame.from_dict({})
 level = 0
 
+def get_records():
+    return records
+
+def get_level():
+    return level
+
 # Returns the column names as a list
 def get_columns():
     return records.columns.to_list()
