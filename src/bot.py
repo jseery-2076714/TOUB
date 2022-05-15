@@ -2,11 +2,18 @@
 import sys
 import discord
 import os
-from modules.convert import convertUnit, parseMessage
-from src import sheets
-from src import mini_game as mg
 from dotenv import load_dotenv
-
+import importlib, importlib.util
+ 
+def module_directory(name_module, path):
+    P = importlib.util.spec_from_file_location(name_module, path)
+    import_module = importlib.util.module_from_spec(P)
+    P.loader.exec_module(import_module)
+    return import_module
+ 
+sheets = module_directory("result", "./modules/sheets.py")
+convert = module_directory("result", "./modules/convert.py")
+mg = module_directory("result", "./modules/mini_game.py")
 
 def main():
     TOKEN = ''
