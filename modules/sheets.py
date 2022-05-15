@@ -2,11 +2,16 @@
 import gspread
 import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
-import os
 
 worksheet = None
 records = pd.DataFrame.from_dict({})
 level = 0
+
+def get_records():
+    return records
+
+def get_level():
+    return level
 
 # Returns the column names as a list
 def get_columns():
@@ -40,12 +45,12 @@ def set_up_api():
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
     # add credentials to the account
-    creds = ServiceAccountCredentials.from_json_keyfile_name(os.getcwd() +'/src/creds.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('./modules/creds.json', scope)
 
     # authorize the clientsheet 
     client = gspread.authorize(creds)
 
-    # get the instance of the Spreadsheet
+    # get the instance of the Spreadsheetß
     sheet = client.open('Conversions')
 
     # get the first sheet of the Spreadsheet

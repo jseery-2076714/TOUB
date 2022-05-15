@@ -1,0 +1,10 @@
+flake8
+discord.py
+pytest
+distest
+distest-check
+python-dotenv
+gspread
+google-api-python-client
+pandas
+oauth2client

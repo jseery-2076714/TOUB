@@ -7,16 +7,6 @@ import random as rd
 data_file = 'src/data/data_toub_conv.csv'
 data = pd.read_csv(data_file)
 
-
-def main():
-    userInput = ''
-    prompt()
-   
-    while not(userInput == 'exit'):
-        userInput = input()
-        proc_input(userInput)
-
-
 def prompt():
     return 'Test your unit conversion smarts with this fun minigame. Use the reactions to pick the correct option'
 
@@ -60,6 +50,8 @@ def gen_rand_wrong_ans(unit, dim, amount):
     return ans + " " + data.loc[wrongUnit][0]
 
 
+
+
 def game_func1(): 
     randomUnitNum = rd.randint(0,4)
     randomDimNum = rd.randint(1,3)
@@ -70,45 +62,29 @@ def game_func1():
     # random not the unit above
     # generate 4 other relevant options
     option = ['1', '2', '3', '4']
-    newOpt = rd.choice(option)
-    rem_options = list(set(option).difference(set(newOpt)))
-    #print(rem_options)
-    
+    correctChoice = rightChoice()
+    rem_options = list(set(option).difference(set(correctChoice)))
+
     correctAns = gen_ans(randomUnitNum, randomDimNum, randomNum) 
 
-    #print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
     randGen1 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen2 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen3 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
-    key_value = {newOpt: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
+    key_value = {correctChoice: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
     
     returner = "What is " + str(randomNum)+ " " + randomUnit + " equal to? \n"
     for x in sorted (key_value):
         returner += x + ") " + key_value[x]  + "\n"
     return returner  
 
+
+def rightChoice():
+    option = ['1', '2', '3', '4']
+    correctChoice = rd.choice(option)
+    return correctChoice
+
 def game_won():
         return ("Correct! Aren't you so smart")
-
-
-
-    
-
-    # inp = ''
-    # while not (inp == newOpt): 
-    #     inp = input()
-    #     if(inp == newOpt):
-    #         print ("Correct! Aren't you so smart")
-    #     elif(inp == 'exit'):
-    #         break  
-    #     elif(inp != newOpt):
-    #         print("You suck, try again")
-    #         print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
-    #         for x in sorted (key_value):
-    #             print(x + ") " + key_value[x])   
-            
-if __name__ == "__main__":
-    main()
 
 
 

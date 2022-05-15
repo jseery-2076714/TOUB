@@ -1,0 +1,45 @@
+TOUB User Manual 
+
+High Level Description:
+
+TOUB is a bot which can be integrated with popular messaging services such as 
+Discord, and acts as a fun and confusing incentive to encourage people to use SI 
+units. Functionally, this bot takes any non-SI unit measurement in all chat messages 
+wherever it is integrated and converts that measurement to obscure units that are 
+unknown to the vast majority of people and likely completely useless. It can 
+optionally be used to convert non-SI units to SI units for a more user-friendly 
+experience, or it can even convert all forms of measurement into randomly selected
+obscure measurements for maximum chaos.
+
+How to install the software:
+
+Prerequisites: discord account.
+Instructions:
+Go to the discord app website (https://discord.com/app) and login to your account.
+Select the server you want to add the bot to and click on the drop-down arrow next to
+the server’s name.
+Go to "Server Settings" from the drop down menu.
+Click on ‘Roles’, scroll down, and enable ‘Manage Server’ permission under the
+General Server Permissions section. Once done, click on ‘Save Changes’.
+Open your browser and paste the following URL:
+https://discordapp.com/oauth2/authorize
+client_id=970509633179492393&scope=bot&permissions=0
+Select the server you want to add TOUB to and click "Authorize"
+
+
+How to run the software:
+
+Once the bot is downloaded on the server, you can run it by typing a toub command,
+these commands begin with "$toub-". If you want to learn about the commands or see
+all the options, type "$toub-help". 
+
+How to report a bug:
+
+Open the README.md, find the "Bug Reporting" section.
+Add a clear summary of the bug, instructions on how to reproduce the bug, the
+expected outcome, and the actual outcome. Then, if there is additional information
+you find important, add that information as additional information. 
+
+
+Known bugs:
+Write these here.

@@ -1,10 +1,19 @@
 # Parsing and conversion
 import random as rd
-import sheets
+import importlib, importlib.util
+ 
+def module_directory(name_module, path):
+    P = importlib.util.spec_from_file_location(name_module, path)
+    import_module = importlib.util.module_from_spec(P)
+    P.loader.exec_module(import_module)
+    return import_module
+
+sheets = module_directory("sheets", "./modules/sheets.py")
+sheets.set_up_api()
 
 # Given a message from Discord
 # Return converted message
-def parseMessage(message):
+def parse_message(message):
     # error checking
     
     # Split message up
@@ -16,11 +25,12 @@ def parseMessage(message):
             if(i == len(words)-1):
                 break
             value = words[i]
+
             # find unit
-            for unit in sheets.records['Unit'].tolist():
+            for unit in sheets.get_col('unit'):
                 # convert to different unit based on level of bot and update message
                 if(unit in words[i+1].lower()):
-                    (resValue, resUnit) = convertUnit(float(value), unit, unitSelect(unit, sheets.level)).split(' ')
+                    (resValue, resUnit) = convert_unit(float(value), unit, unit_select(unit, sheets.get_level())).split(' ')
                     words[i] = resValue
                     words[i+1] = resUnit
                     i+=1    
@@ -31,7 +41,7 @@ def parseMessage(message):
 
 ## Given the value of current, current, and target
 ### Return the value in terms of target
-def convertUnit(value, current, target):
+def convert_unit(value, current, target):
     ### retrieved rows from sheets
     cv = float(sheets.get_data(current)[1])
     tv = float(sheets.get_data(target)[1])
@@ -40,7 +50,7 @@ def convertUnit(value, current, target):
 
 # Given the current unit and bot level of chaos
 # Return randomly selected unit from sheet
-def unitSelect(unit, level):
+def unit_select(unit, level):
     if(level == 1):
         return "centimeter"
     # get possible units

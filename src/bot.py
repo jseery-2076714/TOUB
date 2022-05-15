@@ -2,9 +2,9 @@
 import sys
 import discord
 import os
-from convert import convertUnit, parseMessage
-import sheets
-import mini_game as mg
+from src.convert import convertUnit, parseMessage
+from src import sheets
+from src import mini_game as mg
 from dotenv import load_dotenv
 
 
@@ -14,6 +14,7 @@ def main():
     # check if bot is running on GitHub or locally
     if '/home/runner/work/TOUB/TOUB' in sys.path:
         load_dotenv()
+        print("Loading token from .env")
         TOKEN = os.getenv('DISCORD_TOKEN')
         SERVER = os.getenv('DISCORD_SERVER')
 
@@ -43,13 +44,17 @@ def main():
         elif message.content.startswith('$hello'):
             await message.channel.send('Hello!')
            
-        ### Checking for specific toub commands
+        ### user input: a command that starts with "!"
+        ###             this is how TOUB knows it is a toub command
         elif message.content.startswith('!'):
             input = message.content.lower().split(' ')
             command =  input[0][1:]
 
-            ### lists all the commands/formats
-            ### Need a command to change level
+
+            ### user command: !toub-help
+            ###             asking TOUB to list all commands/formats user can use to prompt toub to do something
+            ### bot output: list of commands, !toub-list, !toub-list-r, !toub-level, !toub-level [level], 
+            ###             !toub-convert [value] [unit1] [unit2], !toub-convert [unit1] [unit2], !toub-minigame
             if(command == 'toub-help'):
                 await message.channel.send('!toub-list : display all units\n'
                 + '!toub-list-r : display all units with ratios to SI\n'
@@ -59,9 +64,13 @@ def main():
                 + '!toub-convert [unit1] [unit2] : converts 1 unit in unit1 to its value in unit2\n'
                 + '!toub-minigame : begins minigame')
             
-            ### lists all the units
+            ### user command: !toub-list, !toub-list-r
+            ###             prompts toub to list all possible units the user can chooose from
+            ### bot output: all possible units the user can chooose from
             elif('toub-list' in command):
-                ### lists units with ratios to SI
+                ### user command: !toub-list-r
+                ###             prompts toub to list all possible units with ratios to SI
+                ### bot output: all possible units the user can chooose from with ratios to SI
                 if('-r' in command):
                     units = sheets.get_col('unit')
                     finalMessage = '__**Units : CM**__ \n'
@@ -76,15 +85,20 @@ def main():
                     await message.channel.send(finalMessage)
 
                 else:
-                    ### will change this to a bunch of random units, once we have those
+                    ### user command: !toub-list
+                    ###             prompts toub to list all possible units the user can chooose from
+                    ### bot output: all possible units the user can chooose from
                     units = sheets.get_col('unit')
                     finalMessage = '__**Units**__ \n'
                     for unit in units:
                         finalMessage += unit + '\n'
                     await message.channel.send(finalMessage)
             
-            ### changes the level of the bot
-            ### options (1, 2, 3)
+            ### user command: !toub-level [level], !toub-level
+            ###             asking TOUB to change the level of the game (1, 2, or 3), or asking TOUB for the current level 
+            ### bot output: the current level of the bot
+            ### restrictions: ONLY ADMINISTRATORS CAN CHANGE THE LEVEL, if user attempts to change the level to an invalid
+            ###               level, the bot defaults to setting the level to 1
             elif('toub-level' in command):
                 if(not message.author.guild_permissions.administrator):
                     await message.channel.send("You don't have permission to change the level!")
@@ -102,9 +116,10 @@ def main():
                 elif (templevel == 3.0):
                     sheets.level = 3
                     await message.channel.send('Current level: ' + str(sheets.level))
-                ### Not a valid level
+                ### sends the current level, does not change level
                 elif (command == 'toub-level'):
                     await message.channel.send('Current level: ' + str(sheets.level))
+                ### Not a valid level, default to level 1
                 else :
                     sheets.level = 1
                     await message.channel.send('Not a valid level. Default to level 1')
@@ -112,23 +127,40 @@ def main():
             elif('toub-currentLevel' in command):
                 await message.channel.send('Current leve: ' + str(sheets.level))
 
-            ### converts from unit1 to unit2 (if value is entered, convert to that number of values, else value is 1)
+            ### user command: !toub-convert [value] [unit1] [unit2], !toub-convert [unit1] [unit2]
+            ###             converts a value of unit1 tto unit2, or converts 1 unit1 to unit2
+            ### bot output: the conversion 
             elif(command == 'toub-convert'):
-                firstUnit = input[2]
-                secondUnit = input[3]
+                ### user command: !toub-convert [value] [unit1] [unit2]
+                ###             converts a value of unit1 tto unit2
+                ### bot output: the conversion 
                 units = sheets.get_col('unit')
-                if(firstUnit not in units):
-                        await message.channel.send(firstUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm]' to add it!")
-                        return
-                if(secondUnit not in units):
-                    await message.channel.send(secondUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm] [dimension]' to add it!")
-                    return
                 try:
                     value = float(input[1])
+                    firstUnit = input[2]
+                    secondUnit = input[3]
+                    if(firstUnit not in units):
+                        await message.channel.send(firstUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm]' to add it!")
+                        return
+                    if(secondUnit not in units):
+                        await message.channel.send(secondUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm] [dimension]' to add it!")
+                        return
                     result = convertUnit(value, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                     return
+
+                ### user command: !toub-convert [unit1] [unit2]
+                ###             converts 1 unit1 to unit2
+                ### bot output: the conversion 
                 except ValueError:
+                    firstUnit = input[1]
+                    secondUnit = input[2]
+                    if(firstUnit not in units):
+                        await message.channel.send(firstUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm]' to add it!")
+                        return
+                    if(secondUnit not in units):
+                        await message.channel.send(secondUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm] [dimension]' to add it!")
+                        return
                     result = convertUnit(1, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                     return
@@ -144,7 +176,9 @@ def main():
                 await message.channel.send("Unit: " + unit + " : " + str(value) + " added!")
                 return
 
-            ### minigame
+            ### user command: !toub-minigame
+            ###             prompts toub to begin mini game
+            ### bot output: the minigame
             elif(command == 'toub-minigame'):
                 await message.channel.send(mg.prompt())
                 msg = await message.channel.send(mg.game_func1())
@@ -152,7 +186,8 @@ def main():
                 await msg.add_reaction('2️⃣')  
                 await msg.add_reaction('3️⃣')    
                 await msg.add_reaction('4️⃣')  
-
+       
+        ### not a toub command
         else:
             parsed = parseMessage(message.content)
             if(parsed == message.content):
