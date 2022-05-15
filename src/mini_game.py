@@ -60,6 +60,8 @@ def gen_rand_wrong_ans(unit, dim, amount):
     return ans + " " + data.loc[wrongUnit][0]
 
 
+
+
 def game_func1(): 
     randomUnitNum = rd.randint(0,4)
     randomDimNum = rd.randint(1,3)
@@ -70,29 +72,29 @@ def game_func1():
     # random not the unit above
     # generate 4 other relevant options
     option = ['1', '2', '3', '4']
-    newOpt = rd.choice(option)
-    rem_options = list(set(option).difference(set(newOpt)))
-    #print(rem_options)
-    
+    # correctChoice = rd.choice(option)
+    rem_options = list(set(option).difference(set(game_rightChoice())))
+
     correctAns = gen_ans(randomUnitNum, randomDimNum, randomNum) 
 
-    #print("What is " + str(randomNum)+ " " + randomUnit + " equal to?")
     randGen1 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen2 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen3 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
-    key_value = {newOpt: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
+    key_value = {game_rightChoice(): correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
     
     returner = "What is " + str(randomNum)+ " " + randomUnit + " equal to? \n"
     for x in sorted (key_value):
         returner += x + ") " + key_value[x]  + "\n"
     return returner  
 
+
+def game_rightChoice():
+    option = ['1', '2', '3', '4']
+    correctChoice = rd.choice(option)
+    return correctChoice
+
 def game_won():
         return ("Correct! Aren't you so smart")
-
-
-
-    
 
     # inp = ''
     # while not (inp == newOpt): 
