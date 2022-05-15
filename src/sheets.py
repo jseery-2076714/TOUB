@@ -4,6 +4,7 @@ import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 
+worksheet = None
 records = pd.DataFrame.from_dict({})
 level = 0
 
@@ -19,9 +20,22 @@ def get_col(colname):
 def get_data(unit):
     return records.loc[records['unit'] == unit].values.flatten().tolist()
 
+def add_unit(unit, value, dimension):
+    row = []
+    if(dimension == 1):
+        row = [unit, value]
+    elif(dimension == 2):
+        row = [unit, '', value]
+    else:
+        row = [unit, '', '', value]
+    worksheet.append_row([unit, value])
+    records.loc[len(records.index)] = row
+    return
+
 def set_up_api():
     global records
     global level
+    global worksheet
     # define the scope
     scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
@@ -35,9 +49,9 @@ def set_up_api():
     sheet = client.open('Conversions')
 
     # get the first sheet of the Spreadsheet
-    sheet_instance = sheet.get_worksheet(0)
+    worksheet = sheet.get_worksheet(0)
 
     # get all the records of the data
-    records_data = sheet_instance.get_all_records()
+    records_data = worksheet.get_all_records()
     level = 1
     records = pd.DataFrame.from_dict(records_data)

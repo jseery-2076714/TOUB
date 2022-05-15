@@ -9,16 +9,13 @@ from dotenv import load_dotenv
 
 
 def main():
-    TOKEN = ''
-    SERVER = ''
+    TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GtSges.' + 'H2lCnOWQ2zImGhEk2v_bqQIiW07j9-2YNN3z00'
+    SERVER = 'TOUB'
     # check if bot is running on GitHub or locally
     if '/home/runner/work/TOUB/TOUB' in sys.path:
         load_dotenv()
         TOKEN = os.getenv('DISCORD_TOKEN')
         SERVER = os.getenv('DISCORD_SERVER')
-    else:
-        TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.' + 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
-        SERVER = 'TOUB'
 
     client = discord.Client()
 
@@ -66,31 +63,25 @@ def main():
             elif('toub-list' in command):
                 ### lists units with ratios to SI
                 if('-r' in command):
-                    await message.channel.send('Unit:   SI(cm):\n'
-                    + 'inch    2.54\n'
-                    + 'feet    30.48\n'
-                    + 'yard    91.44\n'
-                    + 'mile    160934.4\n'
-                    + 'furlong 20116.8\n'
-                    + '\n'
-                    + 'Unit:   SI(cm^3):\n'
-                    + 'pint    473.176\n'
-                    + 'quart   946.352\n'
-                    + 'cup     236.588\n')
+                    units = sheets.get_col('unit')
+                    finalMessage = '__**Units : CM**__ \n'
+                    for unit in units:
+                        if(sheets.get_data(unit)[1]):
+                            value = str(sheets.get_data(unit)[1]) + ' cm\n'
+                        elif(str(sheets.get_data(unit)[2])):
+                            value = str(sheets.get_data(unit)[2]) + ' cm^2 \n'
+                        else:
+                            value = str(sheets.get_data(unit)[3]) + ' cm^3 \n'
+                        finalMessage += unit + ' : ' + value
+                    await message.channel.send(finalMessage)
 
                 else:
                     ### will change this to a bunch of random units, once we have those
-                    await message.channel.send('Unit:   SI(cm):\n'
-                    + 'inch    2.54\n'
-                    + 'feet    30.48\n'
-                    + 'yard    91.44\n'
-                    + 'mile    160934.4\n'
-                    + 'furlong 20116.8\n'
-                    + '\n'
-                    + 'Unit:   SI(cm^3):\n'
-                    + 'pint    473.176\n'
-                    + 'quart   946.352\n'
-                    + 'cup     236.588\n')
+                    units = sheets.get_col('unit')
+                    finalMessage = '__**Units**__ \n'
+                    for unit in units:
+                        finalMessage += unit + '\n'
+                    await message.channel.send(finalMessage)
             
             ### changes the level of the bot
             ### options (1, 2, 3)
@@ -118,20 +109,40 @@ def main():
                     sheets.level = 1
                     await message.channel.send('Not a valid level. Default to level 1')
 
+            elif('toub-currentLevel' in command):
+                await message.channel.send('Current leve: ' + str(sheets.level))
 
             ### converts from unit1 to unit2 (if value is entered, convert to that number of values, else value is 1)
             elif(command == 'toub-convert'):
+                firstUnit = input[2]
+                secondUnit = input[3]
+                units = sheets.get_col('unit')
+                if(firstUnit not in units):
+                        await message.channel.send(firstUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm]' to add it!")
+                        return
+                if(secondUnit not in units):
+                    await message.channel.send(secondUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm] [dimension]' to add it!")
+                    return
                 try:
                     value = float(input[1])
-                    firstUnit = input[2]
-                    secondUnit = input[3]
                     result = convertUnit(value, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
+                    return
                 except ValueError:
-                    firstUnit = input[1]
-                    secondUnit = input[2]
                     result = convertUnit(1, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
+                    return
+            
+            elif(command == 'toub-add-unit'):
+                unit = input[1]
+                value = float(input[2])
+                dimension = int(input[3])
+                if(dimension > 3 or dimension < 1):
+                    await message.channel.send("Invalid dimension, must be between 1-3")
+                    return
+                sheets.add_unit(unit, value, dimension)
+                await message.channel.send("Unit: " + unit + " : " + str(value) + " added!")
+                return
 
             ### minigame
             elif(command == 'toub-minigame'):
