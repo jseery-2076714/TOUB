@@ -14,6 +14,7 @@ README.md (overarching doc woth info on TOUB)
 requirements.txt (list of TOUB requirements)
 run_tests.sh (script to run tests)
 user_manual.txt (User Manual)
+developer_guidelines.txt (guidelines for those who are developing TOUB)
 
 How to build the software:
 I HAVE NO IDEA :)
