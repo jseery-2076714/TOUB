@@ -43,8 +43,9 @@ def parse_message(message):
 ### Return the value in terms of target
 def convert_unit(value, current, target):
     ### retrieved rows from sheets
-    cv = float(sheets.get_data(current)[1])
-    tv = float(sheets.get_data(target)[1])
+    cv = sheets.get_value(current)
+    print(target)
+    tv = sheets.get_value(target)
     return str(value * cv/tv) + " " + str(target)
 
 
@@ -55,6 +56,8 @@ def unit_select(unit, level):
         return "centimeter"
     # get possible units
     units = sheets.get_col('unit')
+    if(sheets.level == 3):
+        units = units[9:]
     # pick one
     newUnit = rd.choice(units)
     # if it is the same unit, pick a new one

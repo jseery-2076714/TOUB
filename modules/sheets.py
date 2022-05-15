@@ -25,6 +25,13 @@ def get_col(colname):
 def get_data(unit):
     return records.loc[records['unit'] == unit].values.flatten().tolist()
 
+def get_value(unit):
+    row = records.loc[records['unit'] == unit].values.flatten().tolist()
+    index = 1
+    while(not row[index]):
+        index += 1
+    return float(row[index])**(1/index)
+
 def add_unit(unit, value, dimension):
     row = []
     if(dimension == 1):
