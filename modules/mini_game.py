@@ -75,6 +75,7 @@ def game_func1():
     returner = "What is " + str(randomNum)+ " " + randomUnit + " equal to? \n"
     for x in sorted (key_value):
         returner += x + ") " + key_value[x]  + "\n"
+    returner += '5) None of the above'
     return returner  
 
 
