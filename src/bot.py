@@ -141,17 +141,10 @@ def main():
                 ### user command: !toub-convert [value] [unit1] [unit2]
                 ###             converts a value of unit1 tto unit2
                 ### bot output: the conversion 
-                units = sheets.get_col('unit')
                 try:
                     value = float(input[1])
                     firstUnit = input[2]
                     secondUnit = input[3]
-                    if(firstUnit not in units):
-                        await message.channel.send(firstUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm]' to add it!")
-                        return
-                    if(secondUnit not in units):
-                        await message.channel.send(secondUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm] [dimension]' to add it!")
-                        return
                     result = convert.convert_unit(value, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                     return
@@ -162,12 +155,6 @@ def main():
                 except ValueError:
                     firstUnit = input[1]
                     secondUnit = input[2]
-                    if(firstUnit not in units):
-                        await message.channel.send(firstUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm]' to add it!")
-                        return
-                    if(secondUnit not in units):
-                        await message.channel.send(secondUnit + " is not in our current database. Use '!toub-add-unit [unit] [value in cm] [dimension]' to add it!")
-                        return
                     result = convert.convert_unit(1, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                     return
@@ -205,7 +192,13 @@ def main():
     @client.event
     async def on_reaction_add(reaction, user):
         if user != client.user:
-            if str(reaction.emoji) == '1️⃣':
+            if str(reaction.emoji) == '1️⃣' and mg.rightChoice() == 'a':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '2️⃣' and mg.rightChoice() == 'b':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '3️⃣' and mg.rightChoice() == 'c':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '4️⃣' and mg.rightChoice() == 'd':
                 await reaction.message.channel.send (mg.game_won())
 
     client.run(TOKEN)
