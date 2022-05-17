@@ -4,6 +4,7 @@ import discord
 import os
 from dotenv import load_dotenv
 import importlib, importlib.util
+import datetime as date
  
 def module_directory(name_module, path):
     P = importlib.util.spec_from_file_location(name_module, path)
@@ -76,7 +77,6 @@ def main():
             ### user command: !toub-isitabbysbirthday
             ###                   outputs if it's abby's birthday
             elif ('!toub-isitabbysbirthday'):
-                import datetime as date
                 today = date.date.today().strftime('%B %d')
                 time = date.datetime.now()
                 abby_birthday = 'May 16'
