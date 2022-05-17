@@ -73,6 +73,7 @@ def main():
             ### Very important functionality
             ###
             ### user command: !toub-isitabbysbirthday
+            ###                   outputs if it's abby's birthday
             elif ('!toub-isitabbysbirthday'):
                 import datetime as date
                 today = date.date.today().strftime('%B %d')
