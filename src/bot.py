@@ -108,10 +108,11 @@ def main():
             ### restrictions: ONLY ADMINISTRATORS CAN CHANGE THE LEVEL, if user attempts to change the level to an invalid
             ###               level, the bot defaults to setting the level to 1
             elif('toub-level' in command):
-                if(not message.author.guild_permissions.administrator):
-                    await message.channel.send("You don't have permission to change the level!")
-                    return
+                
                 if(len(input) > 1):
+                    if(not message.author.guild_permissions.administrator):
+                        await message.channel.send("You don't have permission to change the level!")
+                        return
                     templevel = float(input[1])
                 else:
                     ### sends the current level, does not change level
