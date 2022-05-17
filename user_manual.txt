@@ -42,4 +42,9 @@ you find important, add that information as additional information.
 
 
 Known bugs:
-Write these here.
+Conversions between dimensions should be checked and not allowed
+
+
+Work in Progress:
+- Level 2/3 bot
+- Minigame

@@ -111,7 +111,11 @@ def main():
                 if(not message.author.guild_permissions.administrator):
                     await message.channel.send("You don't have permission to change the level!")
                     return
-                templevel = float(input[1])
+                if(len(input) > 1):
+                    templevel = float(input[1])
+                else:
+                    ### sends the current level, does not change level
+                    await message.channel.send('Current level: ' + str(sheets.level))
                 ### change to level 1
                 if(templevel == 1.0):
                     sheets.level = 1
@@ -123,10 +127,7 @@ def main():
                 ### change to level 3
                 elif (templevel == 3.0):
                     sheets.level = 3
-                    await message.channel.send('Current level: ' + str(sheets.level))
-                ### sends the current level, does not change level
-                elif (command == 'toub-level'):
-                    await message.channel.send('Current level: ' + str(sheets.level))
+                    await message.channel.send('Current level: ' + str(sheets.level))                    
                 ### Not a valid level, default to level 1
                 else :
                     sheets.level = 1
