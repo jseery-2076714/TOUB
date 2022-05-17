@@ -10,12 +10,14 @@ data = pd.read_csv(data_file)
 def prompt():
     return 'Test your unit conversion smarts with this fun minigame. Use the reactions to pick the correct option'
 
+
 def proc_input(input):
     # error checking
     # return stuff if wrong
     if (input == 'play'):
         game_func1()
 
+#generates the correct answer given a unit, dimension, and amount 
 def gen_ans(unit, dim, amount):
     cols = data.columns.to_numpy()
     colvals = data[cols[dim]].to_numpy()
@@ -28,10 +30,14 @@ def gen_ans(unit, dim, amount):
 
     return ans + " " + data.loc[randomCorrectAnswer][0]
 
+#generates wrong answers given a unit, dimension, and amount 
 def gen_rand_wrong_ans(unit, dim, amount):
     wrongUnit = rd.randint(0,4)
     wrongNum = rd.randint(1,3)
 
+    #loops so that the same unit and number
+    #that was passed in cannot be
+    #used again
     while(wrongUnit == unit):
         wrongUnit = rd.randint(0,4)
     
@@ -40,7 +46,6 @@ def gen_rand_wrong_ans(unit, dim, amount):
 
     cols = data.columns.to_numpy()
     colvals = data[cols[wrongNum]].to_numpy()
-    #randomCorrectAnswer = rd.randint(0, 4)
 
     anotherRandUnit = colvals[wrongUnit]
     givenUnitIntoCm = colvals[wrongNum] 
@@ -51,7 +56,9 @@ def gen_rand_wrong_ans(unit, dim, amount):
 
 
 
-
+#game function. Creats the unit, dimension and amount for question
+#calls other methods to generate the right answer and wrong answer
+#returns a string with the prompt and choices
 def game_func1(): 
     randomUnitNum = rd.randint(0,4)
     randomDimNum = rd.randint(1,3)
@@ -78,11 +85,14 @@ def game_func1():
     return returner  
 
 
+#returns the correct choice so 
+#it can be checked with the discord bot
 def rightChoice():
     option = ['1', '2', '3', '4']
     correctChoice = rd.choice(option)
     return correctChoice
 
+#returns string for when game is won
 def game_won():
         return ("Correct! Aren't you so smart")
 
