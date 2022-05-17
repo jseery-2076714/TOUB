@@ -29,6 +29,11 @@ async def test_hello(interface):
 async def test_nonSI_to_SI(interface):
     await interface.assert_reply_equals("!toub-convert 1 feet yard", "1.0 feet = 0.33333333333333337 yard")
 
+# Non SI to SI
+# 1 inch to 2.54 cm
+@test_collector()
+async def test_current_level(interface):
+    await interface.assert_reply_equals("!toub-level", "Current level: 1")
 
 # Actually run the bot
 
