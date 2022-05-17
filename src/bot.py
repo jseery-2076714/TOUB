@@ -188,6 +188,7 @@ def main():
                 await msg.add_reaction('2️⃣')  
                 await msg.add_reaction('3️⃣')    
                 await msg.add_reaction('4️⃣')  
+                await msg.add_reaction('5️⃣') 
                 return
        
         ### not a toub command
@@ -209,6 +210,9 @@ def main():
                 await reaction.message.channel.send (mg.game_won())
             if str(reaction.emoji) == '4️⃣' and mg.rightChoice() == 'd':
                 await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '5️⃣' and mg.rightChoice() != 'a' or mg.rightChoice() != 'b' or mg.rightChoice() != 'c' or mg.rightChoice() != 'd' :
+                await reaction.message.channel.send (mg.game_won())
+            
 
     client.run(TOKEN)
 
