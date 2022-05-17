@@ -76,7 +76,7 @@ def main():
             ###
             ### user command: !toub-isitabbysbirthday
             ###                   outputs if it's abby's birthday
-            elif ('!toub-isitabbysbirthday'):
+            elif (command == 'toub-isitabbysbirthday'):
                 today = date.date.today().strftime('%B %d')
                 time = date.datetime.now()
                 abby_birthday = 'May 16'
