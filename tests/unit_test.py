@@ -20,7 +20,7 @@ def test_retrieve():
 
 def test_convert():
     assert convert.convert_unit(1, 'feet', 'yard') == '0.33333333333333337 yard'
-    assert convert.convert_unit(2, 'feet', 'yard') == '0.66666666666666674 yard'
+    assert convert.convert_unit(2, 'feet', 'yard') == '0.6666666666666667 yard'
 
 
 def test_select():
