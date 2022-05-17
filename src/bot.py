@@ -116,6 +116,7 @@ def main():
                 else:
                     ### sends the current level, does not change level
                     await message.channel.send('Current level: ' + str(sheets.level))
+                    return
                 ### change to level 1
                 if(templevel == 1.0):
                     sheets.level = 1
@@ -129,9 +130,10 @@ def main():
                     sheets.level = 3
                     await message.channel.send('Current level: ' + str(sheets.level))                    
                 ### Not a valid level, default to level 1
-                else :
+                else:
                     sheets.level = 1
                     await message.channel.send('Not a valid level. Default to level 1')
+                return
 
             ### user command: !toub-convert [value] [unit1] [unit2], !toub-convert [unit1] [unit2]
             ###             converts a value of unit1 tto unit2, or converts 1 unit1 to unit2
@@ -185,6 +187,7 @@ def main():
                 await msg.add_reaction('2️⃣')  
                 await msg.add_reaction('3️⃣')    
                 await msg.add_reaction('4️⃣')  
+                return
        
         ### not a toub command
         else:
