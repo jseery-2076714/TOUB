@@ -68,6 +68,7 @@ def main():
                 + '!toub-level [level] : change the bot function to desired level of TOUB (1, 2, or 3)\n'
                 + '!toub-convert [value] [unit1] [unit2] : converts a value in unit1 to its value in unit2\n'
                 + '!toub-convert [unit1] [unit2] : converts 1 unit in unit1 to its value in unit2\n'
+                + '!toub-add-unit [unit] [value] [dim] : adds unit to database\n'
                 + '!toub-minigame : begins minigame')
 
             ### Very important functionality
@@ -124,10 +125,16 @@ def main():
             ### restrictions: ONLY ADMINISTRATORS CAN CHANGE THE LEVEL, if user attempts to change the level to an invalid
             ###               level, the bot defaults to setting the level to 1
             elif('toub-level' in command):
-                if(not message.author.guild_permissions.administrator):
-                    await message.channel.send("You don't have permission to change the level!")
+                
+                if(len(input) > 1):
+                    if(not message.author.guild_permissions.administrator):
+                        await message.channel.send("You don't have permission to change the level!")
+                        return
+                    templevel = float(input[1])
+                else:
+                    ### sends the current level, does not change level
+                    await message.channel.send('Current level: ' + str(sheets.level))
                     return
-                templevel = float(input[1])
                 ### change to level 1
                 if(templevel == 1.0):
                     sheets.level = 1
@@ -139,17 +146,12 @@ def main():
                 ### change to level 3
                 elif (templevel == 3.0):
                     sheets.level = 3
-                    await message.channel.send('Current level: ' + str(sheets.level))
-                ### sends the current level, does not change level
-                elif (command == 'toub-level'):
-                    await message.channel.send('Current level: ' + str(sheets.level))
+                    await message.channel.send('Current level: ' + str(sheets.level))                    
                 ### Not a valid level, default to level 1
-                else :
+                else:
                     sheets.level = 1
                     await message.channel.send('Not a valid level. Default to level 1')
-
-            elif('toub-currentLevel' in command):
-                await message.channel.send('Current leve: ' + str(sheets.level))
+                return
 
             ### user command: !toub-convert [value] [unit1] [unit2], !toub-convert [unit1] [unit2]
             ###             converts a value of unit1 tto unit2, or converts 1 unit1 to unit2
@@ -176,7 +178,13 @@ def main():
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                     return
             
+            ### user command: !toub-convert [unit] [value] [dim]
+            ###             adds the unit conversion into the google sheets database
+            ### bot output: success or failure in adding the unit
             elif(command == 'toub-add-unit'):
+                if(not message.author.guild_permissions.administrator):
+                    await message.channel.send("You don't have permission to add a unit!")
+                    return
                 unit = input[1]
                 value = float(input[2])
                 dimension = int(input[3])
@@ -198,6 +206,7 @@ def main():
                 await msg.add_reaction('3️⃣')    
                 await msg.add_reaction('4️⃣')  
                 await msg.add_reaction('5️⃣') 
+                return
        
         ### not a toub command
         else:
