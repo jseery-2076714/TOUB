@@ -76,18 +76,16 @@ def main():
             elif ('!toub-isitabbysbirthday'):
                 import datetime as date
                 today = date.date.today().strftime('%B %d')
+                time = date.datetime.now()
                 abby_birthday = 'May 16'
                 if (today == abby_birthday):
-                    time = date.datetime.now()
                     time2 = date.datetime(2022,5,17,0,0,0)
                     time3 = time2-time
-                    await message.channel.send('yes, there are ' + str(int(str(time3)[:2]) * 60 + int(str(time3)[3:5])) + ' minutes left of abby\'s birthday')
+                    await message.channel.send('yes, there are ' + str(time3.seconds) + ' seconds left of abby\'s birthday')
                 else:
-                    time = date.datetime.now()
                     time2 = date.datetime(2023,5,17,0,0,0)
                     time3 = time2-time
-                    print(str(time3))
-                    await message.channel.send('no lol, unlucky, there are ' + str(int(str(time3)[:3])*24*60 + int(str(time3)[10:12])*60 + int(str(time3)[13:15])) + ' minutes left until abby\'s birthday')
+                    await message.channel.send('no lol, unlucky, there are ' + str(time3.days*24*60*60 + time3.seconds) + ' seconds left until abby\'s birthday')
 
             ### user command: !toub-list, !toub-list-r
             ###             prompts toub to list all possible units the user can chooose from
