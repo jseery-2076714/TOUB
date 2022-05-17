@@ -45,7 +45,7 @@ def gen_rand_wrong_ans(unit, dim, amount):
     anotherRandUnit = colvals[wrongUnit]
     givenUnitIntoCm = colvals[wrongNum] 
     ratio = givenUnitIntoCm / anotherRandUnit
-    ans = str(amount * ratio)
+    ans = str(amount * ratio) 
 
     return ans + " " + data.loc[wrongUnit][0]
 
@@ -70,7 +70,7 @@ def game_func1():
     randGen1 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen2 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen3 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
-    key_value = {correctChoice: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3}
+    key_value = {correctChoice: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3, '5': "None of the above"}
     
     returner = "What is " + str(randomNum)+ " " + randomUnit + " equal to? \n"
     for x in sorted (key_value):
