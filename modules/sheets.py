@@ -5,7 +5,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 worksheet = None
 records = pd.DataFrame.from_dict({})
-level = 0
+level = 1
 
 def get_records():
     return records
