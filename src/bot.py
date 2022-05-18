@@ -102,6 +102,7 @@ def main():
                         finalMessage += unit + '\n'
                     await message.channel.send(finalMessage)
             
+            
             ### user command: !toub-level [level], !toub-level
             ###             asking TOUB to change the level of the game (1, 2, or 3), or asking TOUB for the current level 
             ### bot output: the current level of the bot
@@ -118,6 +119,9 @@ def main():
                     ### sends the current level, does not change level
                     await message.channel.send('Current level: ' + str(sheets.level))
                     return
+
+                templevel = float(input[1])
+  
                 ### change to level 1
                 if(templevel == 1.0):
                     sheets.level = 1
