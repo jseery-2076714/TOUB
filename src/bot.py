@@ -2,24 +2,29 @@
 import sys
 import discord
 import os
-from src.convert import convertUnit, parseMessage
-from src import sheets
-from src import mini_game as mg
 from dotenv import load_dotenv
+import importlib, importlib.util
+ 
+def module_directory(name_module, path):
+    P = importlib.util.spec_from_file_location(name_module, path)
+    import_module = importlib.util.module_from_spec(P)
+    P.loader.exec_module(import_module)
+    return import_module
+ 
+sheets = module_directory("sheets", "./modules/sheets.py")
+convert = module_directory("convert", "./modules/convert.py")
+mg = module_directory("mini_game", "./modules/mini_game.py")
 
 
 def main():
-    TOKEN = ''
-    SERVER = ''
+    TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GtSges.' + 'H2lCnOWQ2zImGhEk2v_bqQIiW07j9-2YNN3z00'
+    SERVER = 'TOUB'
     # check if bot is running on GitHub or locally
     if '/home/runner/work/TOUB/TOUB' in sys.path:
         load_dotenv()
         print("Loading token from .env")
         TOKEN = os.getenv('DISCORD_TOKEN')
         SERVER = os.getenv('DISCORD_SERVER')
-    else:
-        TOKEN = 'OTcwNTA5NjMzMTc5NDkyMzkz.GO0_P7.' + 'F1him9JcnoCI3-142NLstcVCXnQojmie0RItNE'
-        SERVER = 'TOUB'
 
     client = discord.Client()
 
@@ -35,7 +40,6 @@ def main():
             f'{guild.name}(id: {guild.id})'
         )
         print('We have logged in as {0.user}'.format(client))
-        sheets.set_up_api()
 
     @client.event
     async def on_message(message):
@@ -65,6 +69,7 @@ def main():
                 + '!toub-level [level] : change the bot function to desired level of TOUB (1, 2, or 3)\n'
                 + '!toub-convert [value] [unit1] [unit2] : converts a value in unit1 to its value in unit2\n'
                 + '!toub-convert [unit1] [unit2] : converts 1 unit in unit1 to its value in unit2\n'
+                + '!toub-add-unit [unit] [value] [dim] : adds unit to database\n'
                 + '!toub-minigame : begins minigame')
             
             ### user command: !toub-list, !toub-list-r
@@ -75,34 +80,27 @@ def main():
                 ###             prompts toub to list all possible units with ratios to SI
                 ### bot output: all possible units the user can chooose from with ratios to SI
                 if('-r' in command):
-                    await message.channel.send('Unit:   SI(cm):\n'
-                    + 'inch    2.54\n'
-                    + 'feet    30.48\n'
-                    + 'yard    91.44\n'
-                    + 'mile    160934.4\n'
-                    + 'furlong 20116.8\n'
-                    + '\n'
-                    + 'Unit:   SI(cm^3):\n'
-                    + 'pint    473.176\n'
-                    + 'quart   946.352\n'
-                    + 'cup     236.588\n')
+                    units = sheets.get_col('unit')
+                    finalMessage = '__**Units : CM**__ \n'
+                    for unit in units:
+                        if(sheets.get_data(unit)[1]):
+                            value = str(sheets.get_data(unit)[1]) + ' cm\n'
+                        elif(str(sheets.get_data(unit)[2])):
+                            value = str(sheets.get_data(unit)[2]) + ' cm^2 \n'
+                        else:
+                            value = str(sheets.get_data(unit)[3]) + ' cm^3 \n'
+                        finalMessage += unit + ' : ' + value
+                    await message.channel.send(finalMessage)
 
                 else:
                     ### user command: !toub-list
                     ###             prompts toub to list all possible units the user can chooose from
                     ### bot output: all possible units the user can chooose from
-                    await message.channel.send('Unit:   SI(cm):\n'
-                    + 'inch    2.54\n'
-                    + 'feet    30.48\n'
-                    + 'yard    91.44\n'
-                    + 'mile    160934.4\n'
-                    + 'furlong 20116.8\n'
-                    + '\n'
-                    + ''
-                    + 'Unit:   SI(cm^3):\n'
-                    + 'pint    473.176\n'
-                    + 'quart   946.352\n'
-                    + 'cup     236.588\n')
+                    units = sheets.get_col('unit')
+                    finalMessage = '__**Units**__ \n'
+                    for unit in units:
+                        finalMessage += unit + '\n'
+                    await message.channel.send(finalMessage)
             
             
             ### user command: !toub-level [level], !toub-level
@@ -111,11 +109,20 @@ def main():
             ### restrictions: ONLY ADMINISTRATORS CAN CHANGE THE LEVEL, if user attempts to change the level to an invalid
             ###               level, the bot defaults to setting the level to 1
             elif('toub-level' in command):
-                if(not message.author.guild_permissions.administrator):
-                    await message.channel.send("You don't have permission to change the level!")
+                
+                if(len(input) > 1):
+                    if(not message.author.guild_permissions.administrator):
+                        await message.channel.send("You don't have permission to change the level!")
+                        return
+                    templevel = float(input[1])
+                else:
+                    ### sends the current level, does not change level
+                    await message.channel.send('Current level: ' + str(sheets.level))
                     return
+
                 templevel = float(input[1])
-                ### change to level 1 
+  
+                ### change to level 1
                 if(templevel == 1.0):
                     sheets.level = 1
                     await message.channel.send('Current level: ' + str(sheets.level))
@@ -126,15 +133,12 @@ def main():
                 ### change to level 3
                 elif (templevel == 3.0):
                     sheets.level = 3
-                    await message.channel.send('Current level: ' + str(sheets.level))
-                ### sends the current level, does not change level
-                elif (command == 'toub-level'):
-                    await message.channel.send('Current level: ' + str(sheets.level))
+                    await message.channel.send('Current level: ' + str(sheets.level))                    
                 ### Not a valid level, default to level 1
-                else :
+                else:
                     sheets.level = 1
                     await message.channel.send('Not a valid level. Default to level 1')
-
+                return
 
             ### user command: !toub-convert [value] [unit1] [unit2], !toub-convert [unit1] [unit2]
             ###             converts a value of unit1 tto unit2, or converts 1 unit1 to unit2
@@ -147,16 +151,36 @@ def main():
                     value = float(input[1])
                     firstUnit = input[2]
                     secondUnit = input[3]
-                    result = convertUnit(value, firstUnit, secondUnit)
+                    result = convert.convert_unit(value, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
+                    return
+
                 ### user command: !toub-convert [unit1] [unit2]
                 ###             converts 1 unit1 to unit2
                 ### bot output: the conversion 
                 except ValueError:
                     firstUnit = input[1]
                     secondUnit = input[2]
-                    result = convertUnit(1, firstUnit, secondUnit)
+                    result = convert.convert_unit(1, firstUnit, secondUnit)
                     await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
+                    return
+            
+            ### user command: !toub-convert [unit] [value] [dim]
+            ###             adds the unit conversion into the google sheets database
+            ### bot output: success or failure in adding the unit
+            elif(command == 'toub-add-unit'):
+                if(not message.author.guild_permissions.administrator):
+                    await message.channel.send("You don't have permission to add a unit!")
+                    return
+                unit = input[1]
+                value = float(input[2])
+                dimension = int(input[3])
+                if(dimension > 3 or dimension < 1):
+                    await message.channel.send("Invalid dimension, must be between 1-3")
+                    return
+                sheets.add_unit(unit, value, dimension)
+                await message.channel.send("Unit: " + unit + " : " + str(value) + " added!")
+                return
 
             ### user command: !toub-minigame
             ###             prompts toub to begin mini game
@@ -168,20 +192,31 @@ def main():
                 await msg.add_reaction('2️⃣')  
                 await msg.add_reaction('3️⃣')    
                 await msg.add_reaction('4️⃣')  
+                await msg.add_reaction('5️⃣') 
+                return
        
         ### not a toub command
         else:
-            parsed = parseMessage(message.content)
+            parsed = convert.parse_message(message.content)
             if(parsed == message.content):
                 return
             else:
-                await message.channel.send(parseMessage(message.content))
+                await message.channel.send(convert.parse_message(message.content))
 
     @client.event
     async def on_reaction_add(reaction, user):
         if user != client.user:
-            if str(reaction.emoji) == '1️⃣':
+            if str(reaction.emoji) == '1️⃣' and mg.rightChoice() == 'a':
                 await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '2️⃣' and mg.rightChoice() == 'b':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '3️⃣' and mg.rightChoice() == 'c':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '4️⃣' and mg.rightChoice() == 'd':
+                await reaction.message.channel.send (mg.game_won())
+            if str(reaction.emoji) == '5️⃣' and mg.rightChoice() != 'a' or mg.rightChoice() != 'b' or mg.rightChoice() != 'c' or mg.rightChoice() != 'd' :
+                await reaction.message.channel.send (mg.game_won())
+            
 
     client.run(TOKEN)
 
