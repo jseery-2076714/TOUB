@@ -8,13 +8,13 @@
 
 ### 2. Progress and Issues
 
-- Front End:
+- Front End: Improve readability of sent messsages and minigame
 - Back End: Parsing and conversions finished/fixed and levels 2/3 started
 - Testing: CI implementation finally works smoothly, wrote more tests than the arbitrary ones used for CI setup.
 
 ### 3. Plans and Goals for Following Week
 
-- Frontend:
+- Frontend: Support more message formats and other Discord features like reactions for the minigame
 - Backend: Finish levels 2/3 bot, fix parsing based on dimensions
 - Testing: Write lots more tests, expose bugs in our code, fix those bugs. Maintain git repo and CI functionality.
 
