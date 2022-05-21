@@ -193,15 +193,15 @@ def main():
     @client.event
     async def on_reaction_add(reaction, user):
         if user != client.user:
-            if str(reaction.emoji) == '1️⃣' and mg.rightChoice() == 'a':
+            if str(reaction.emoji) == '1️⃣' and mg.rightChoice() == '1':
                 await reaction.message.channel.send (mg.game_won())
-            if str(reaction.emoji) == '2️⃣' and mg.rightChoice() == 'b':
+            if str(reaction.emoji) == '2️⃣' and mg.rightChoice() == '2':
                 await reaction.message.channel.send (mg.game_won())
-            if str(reaction.emoji) == '3️⃣' and mg.rightChoice() == 'c':
+            if str(reaction.emoji) == '3️⃣' and mg.rightChoice() == '3':
                 await reaction.message.channel.send (mg.game_won())
-            if str(reaction.emoji) == '4️⃣' and mg.rightChoice() == 'd':
+            if str(reaction.emoji) == '4️⃣' and mg.rightChoice() == '4':
                 await reaction.message.channel.send (mg.game_won())
-            if str(reaction.emoji) == '5️⃣' and mg.rightChoice() != 'a' or mg.rightChoice() != 'b' or mg.rightChoice() != 'c' or mg.rightChoice() != 'd' :
+            if str(reaction.emoji) == '5️⃣' and mg.rightChoice() != '1' or mg.rightChoice() != '2' or mg.rightChoice() != '3' or mg.rightChoice() != '4' :
                 await reaction.message.channel.send (mg.game_won())
             
 
