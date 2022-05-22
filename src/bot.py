@@ -195,13 +195,13 @@ def main():
         if user != client.user:
             if str(reaction.emoji) == '1️⃣' and mg.rightChoice() == '1':
                 await reaction.message.channel.send (mg.game_won())
-            if str(reaction.emoji) == '2️⃣' and mg.rightChoice() == '2':
+            elif str(reaction.emoji) == '2️⃣' and mg.rightChoice() == '2':
                 await reaction.message.channel.send (mg.game_won())
-            if str(reaction.emoji) == '3️⃣' and mg.rightChoice() == '3':
+            elif str(reaction.emoji) == '3️⃣' and mg.rightChoice() == '3':
                 await reaction.message.channel.send (mg.game_won())
-            if str(reaction.emoji) == '4️⃣' and mg.rightChoice() == '4':
+            elif str(reaction.emoji) == '4️⃣' and mg.rightChoice() == '4':
                 await reaction.message.channel.send (mg.game_won())
-            if str(reaction.emoji) == '5️⃣' and mg.rightChoice() != '1' or mg.rightChoice() != '2' or mg.rightChoice() != '3' or mg.rightChoice() != '4' :
+            elif str(reaction.emoji) == '5️⃣' and mg.rightChoice() != '1' and mg.rightChoice() != '2' and mg.rightChoice() != '3' and mg.rightChoice() != '4' :
                 await reaction.message.channel.send (mg.game_won())
             
 
