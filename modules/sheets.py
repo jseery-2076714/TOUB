@@ -23,6 +23,8 @@ def get_col(colname):
 
 # Returns the information and conversions of the unit as a list
 def get_data(unit):
+    if(not worksheet):
+        set_up_api()
     return records.loc[(records['unit'] == unit) | (records['short name'] == unit)].values.flatten().tolist()
 
 def get_value(unit):
@@ -33,6 +35,8 @@ def get_value(unit):
     return float(row[index])**(1/index), index
 
 def add_unit(unit, value, dimension):
+    if(not worksheet):
+        set_up_api()
     if(unit in records['unit'].unique()):
         rowNum = records[records['unit'] == unit].index[0]
         records.iloc[[rowNum],[dimension]] = value

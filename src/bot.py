@@ -232,7 +232,7 @@ async def toub_addunit(message, inputs):
         await message.channel.send("Invalid dimension, must be between 1-3")
         return
     SHEETS.add_unit(unit, value, dimension)
-    await message.channel.send("Unit: " + unit + " : " + str(value) + " added!")
+    await message.channel.send("Unit: " + unit + " = " + str(value) + "cm^" + str(dimension) + " added!")
     return
 
 ### user command: !toub-minigame
