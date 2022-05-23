@@ -23,10 +23,10 @@ def get_col(colname):
 
 # Returns the information and conversions of the unit as a list
 def get_data(unit):
-    return records.loc[records['unit'] == unit].values.flatten().tolist()
+    return records.loc[(records['unit'] == unit) | (records['short name'] == unit)].values.flatten().tolist()
 
 def get_value(unit):
-    row = records.loc[records['unit'] == unit].values.flatten().tolist()
+    row = get_data(unit)
     index = 1
     while(not row[index]):
         index += 1

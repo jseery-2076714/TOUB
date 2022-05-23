@@ -1,7 +1,6 @@
 # Parsing and conversion
 import random as rd
 import importlib, importlib.util
-from re import L
  
 def module_directory(name_module, path):
     P = importlib.util.spec_from_file_location(name_module, path)
@@ -33,7 +32,7 @@ def parse_message(message):
                 unitsCheck = unitsCheck[:8]
             for unit in unitsCheck:
                 # convert to different unit based on level of bot and update message
-                if(unit in words[i+1].lower()):
+                if(unit in words[i+1].lower() or sheets.get_data(unit)[4] in words[i+1].lower()):
                     newUnit = unit_select(unit, sheets.get_level())
                     result = convert_unit(float(value), unit, newUnit)
                     while(result == ''):
