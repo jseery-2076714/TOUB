@@ -15,10 +15,6 @@ import platform
 test_collector = TestCollector()
 created_channel = None
 
-# @test_collector()
-# async def test_hello(interface):
-#     await interface.assert_reply_equals("$hello", "Hello!")
-
 
 # Write tests for the bot
 
@@ -54,43 +50,83 @@ async def test_convert_nonSI_SI(interface):
     await interface.assert_reply_equals("!toub-convert 2 feet centimeter", "2.0 feet = 60.96 centimeter")
 
 
-"""
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Level 1 default message behavior testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# Testing - non-SI to non-SI
+# Testing - non-SI to SI
 @test_collector()
-async def test_convert_nonSI_nonSI(interface):
-    await interface.assert_reply_equals("0 feet", "0.0 feet = 0.0 yard")
-    await interface.assert_reply_equals("1 feet", "1.0 feet = 0.33333333333333337 yard")
-    await interface.assert_reply_equals("2 feet", "2.0 feet = 0.6666666666666667 yard")
+async def test_level1_nonSI_SI(interface):
+    await interface.assert_reply_equals("0 feet", "0.0 centimeter")
+    await interface.assert_reply_equals("1 feet", "30.48 centimeter")
+    await interface.assert_reply_equals("2 feet", "60.96 centimeter")
 
 
 # Testing - SI to SI
 @test_collector()
-async def test_convert_SI_SI(interface):
-    await interface.assert_reply_equals("!toub-convert 0 centimeter meter", "0.0 centimeter = 0.0 meter")
-    await interface.assert_reply_equals("!toub-convert 1 centimeter meter", "1.0 centimeter = 0.01 meter")
-    await interface.assert_reply_equals("!toub-convert 2 centimeter meter", "2.0 centimeter = 0.02 meter")
+async def test_level1_SI_SI(interface):
+    await interface.assert_reply_equals("0 centimeter", "0.0 centimeter")
+    await interface.assert_reply_equals("1 centimeter", "1.0 centimeter")
+    await interface.assert_reply_equals("2 centimeter", "2.0 centimeter")
 
-# Testing - SI to non-SI
-@test_collector()
-async def test_convert_SI_nonSI(interface):
-    await interface.assert_reply_equals("!toub-convert 0 centimeter feet", "0.0 centimeter = 0.0 feet")
-    await interface.assert_reply_equals("!toub-convert 1 centimeter feet", "1.0 centimeter = 0.03280839895013123 feet")
-    await interface.assert_reply_equals("!toub-convert 2 centimeter feet", "2.0 centimeter = 0.06561679790026247 feet")
 
-# Testing convert command - non-SI to SI
-@test_collector()
-async def test_convert_nonSI_SI(interface):
-    await interface.assert_reply_equals("!toub-convert 0 feet centimeter", "0.0 feet = 0.0 centimeter")
-    await interface.assert_reply_equals("!toub-convert 1 feet centimeter", "1.0 feet = 30.48 centimeter")
-    await interface.assert_reply_equals("!toub-convert 2 feet centimeter", "2.0 feet = 60.96 centimeter")
-"""
-
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Current level command tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Level command tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # Testing getting current level
 @test_collector()
 async def test_current_level(interface):
     await interface.assert_reply_equals("!toub-level", "Current level: 1")
+
+# Testing setting level to level 2
+@test_collector()
+async def test_set_level2(interface):
+    await interface.assert_reply_equals("!toub-level 2", "Current level: 2")
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Level 2 default message behavior testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+# Testing - non-SI to obscure
+@test_collector()
+async def test_level2_nonSI_obscure(interface):
+    await interface.assert_reply_equals("0 feet", "0.0 centimeter")
+    await interface.assert_reply_equals("1 feet", "30.48 centimeter")
+    await interface.assert_reply_equals("2 feet", "60.96 centimeter")
+"""
+
+# Testing - SI to SI
+@test_collector()
+async def test_level2_SI_SI(interface):
+    await interface.assert_reply_equals("0 centimeter", "0.0 centimeter")
+    await interface.assert_reply_equals("1 centimeter", "1.0 centimeter")
+    await interface.assert_reply_equals("2 centimeter", "2.0 centimeter")
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! More level command tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Testing setting level to level 3
+@test_collector()
+async def test_set_level3(interface):
+    await interface.assert_reply_equals("!toub-level 3", "Current level: 3")
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Level 3 default message behavior testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+"""
+# Testing - non-SI to obscure
+@test_collector()
+async def test_level3_nonSI_obscure(interface):
+    await interface.assert_reply_equals("0 feet", "0.0 centimeter")
+    await interface.assert_reply_equals("1 feet", "30.48 centimeter")
+    await interface.assert_reply_equals("2 feet", "60.96 centimeter")
+
+
+# Testing - SI to obscure
+@test_collector()
+async def test_level3_SI_obscure(interface):
+    await interface.assert_reply_equals("0 centimeter", "0.0 centimeter")
+    await interface.assert_reply_equals("1 centimeter", "1.0 centimeter")
+    await interface.assert_reply_equals("2 centimeter", "2.0 centimeter")
+"""
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! More level testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# Testing setting level to invalid level
+@test_collector()
+async def test_set_level_invalid(interface):
+    await interface.assert_reply_equals("!toub-level 4", "Not a valid level. Default to level 1")
 
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Help command test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
