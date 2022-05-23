@@ -30,18 +30,23 @@ def get_value(unit):
     index = 1
     while(not row[index]):
         index += 1
-    return float(row[index])**(1/index)
+    return float(row[index])**(1/index), index
 
 def add_unit(unit, value, dimension):
-    row = []
-    if(dimension == 1):
-        row = [unit, value]
-    elif(dimension == 2):
-        row = [unit, '', value]
+    if(unit in records['unit'].unique()):
+        rowNum = records[records['unit'] == unit].index[0]
+        records.iloc[[rowNum],[dimension]] = value
+        worksheet.update_cell((rowNum+2), dimension+1, value)
     else:
-        row = [unit, '', '', value]
-    worksheet.append_row([unit, value])
-    records.loc[len(records.index)] = row
+        row = []
+        if(dimension == 1):
+            row = [unit, value, '', '']
+        elif(dimension == 2):
+            row = [unit, '', value, '']
+        else:
+            row = [unit, '', '', value]
+        worksheet.append_row([unit, value])
+        records.loc[len(records.index)] = row
     return
 
 def set_up_api():
