@@ -38,8 +38,7 @@ def gen_rand_wrong_ans(unit, dim, amount):
     wrongNum = rd.randint(1,3)
 
     #loops so that the same unit and number
-    #that was passed in cannot be
-    #used again
+    #that was passed in cannot be used again
     while(wrongUnit == unit):
         wrongUnit = rd.randint(0,4)
     
