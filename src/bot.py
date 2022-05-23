@@ -178,7 +178,7 @@ def main():
                     await message.channel.send("Invalid dimension, must be between 1-3")
                     return
                 sheets.add_unit(unit, value, dimension)
-                await message.channel.send("Unit: " + unit + " : " + str(value) + " added!")
+                await message.channel.send("Unit: " + unit + " = " + str(value) + "cm^" + str(dimension) + " added!")
                 return
 
             ### user command: !toub-minigame
