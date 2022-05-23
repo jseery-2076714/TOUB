@@ -21,7 +21,7 @@ def test_retrieve():
 
 # Test convert.py
 def test_convert():
-    assert convert.convert_unit(0, 'feet', 'yard') == '0.0 yard'
+    assert convert.convert_unit(0, 'feet', 'yard') == '0.00e+00 yard'
     assert convert.convert_unit(1, 'feet', 'yard') == '0.33333333333333337 yard'
     assert convert.convert_unit(2, 'feet', 'yard') == '0.6666666666666667 yard'
 
