@@ -41,6 +41,7 @@ def main():
             f'{guild.name}(id: {guild.id})'
         )
         print('We have logged in as {0.user}'.format(client))
+        sheets.set_up_api()
 
     @client.event
     async def on_message(message):
@@ -169,7 +170,10 @@ def main():
                     firstUnit = input[2]
                     secondUnit = input[3]
                     result = convert.convert_unit(value, firstUnit, secondUnit)
-                    await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
+                    if(result == ''):
+                        await message.channel.send("Cannot convert units with different dimensions!")
+                    else:
+                        await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
                     return
 
                 ### user command: !toub-convert [unit1] [unit2]
