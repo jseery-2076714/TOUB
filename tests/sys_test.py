@@ -15,25 +15,28 @@ import platform
 test_collector = TestCollector()
 created_channel = None
 
-
-@test_collector()
-async def test_hello(interface):
-    await interface.assert_reply_equals("$hello", "Hello!")
+# @test_collector()
+# async def test_hello(interface):
+#     await interface.assert_reply_equals("$hello", "Hello!")
 
 
 # Write tests for the bot
 
+# Testing convert command
+@test_collector()
+async def test_convert(interface):
+    await interface.assert_reply_equals("!toub-convert 1 feet yard", "1.0 feet = 0.33333333333333337 yard")
+    await interface.assert_reply_equals("!toub-convert 2 feet yard", "2.0 feet = 0.6666666666666667 yard")
+
 # Non SI to SI
 # 1 inch to 2.54 cm
 @test_collector()
-async def test_nonSI_to_SI(interface):
-    await interface.assert_reply_equals("!toub-convert 1 feet yard", "1.0 feet = 0.33333333333333337 yard")
-
+async def test_current_level(interface):
+    await interface.assert_reply_equals("!toub-level", "Current level: 1")
 
 # Actually run the bot
 
 if __name__ == "__main__":
-
     if platform.system() == 'Windows':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     run_dtest_bot(sys.argv, test_collector)

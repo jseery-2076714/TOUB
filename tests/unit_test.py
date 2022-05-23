@@ -7,17 +7,20 @@ def module_directory(name_module, path):
     import_module = importlib.util.module_from_spec(P)
     P.loader.exec_module(import_module)
     return import_module
- 
+
+
 sheets = module_directory("sheets", "./modules/sheets.py")
 convert = module_directory("convert", "./modules/convert.py")
 sheets.set_up_api()
 
+
 def test_retrieve():
-    print(sheets.get_data('feet'))
     assert sheets.get_data('feet') == ['feet', 30.48, 929.0304, 28316.84659, 'ft']
+
 
 def test_convert():
     assert convert.convert_unit(1, 'feet', 'yard') == '0.33333333333333337 yard'
+    assert convert.convert_unit(2, 'feet', 'yard') == '0.6666666666666667 yard'
 
 
 def test_select():
