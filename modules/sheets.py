@@ -23,25 +23,30 @@ def get_col(colname):
 
 # Returns the information and conversions of the unit as a list
 def get_data(unit):
-    return records.loc[records['unit'] == unit].values.flatten().tolist()
+    return records.loc[(records['unit'] == unit) | (records['short name'] == unit)].values.flatten().tolist()
 
 def get_value(unit):
-    row = records.loc[records['unit'] == unit].values.flatten().tolist()
+    row = get_data(unit)
     index = 1
     while(not row[index]):
         index += 1
-    return float(row[index])**(1/index)
+    return float(row[index])**(1/index), index
 
 def add_unit(unit, value, dimension):
-    row = []
-    if(dimension == 1):
-        row = [unit, value]
-    elif(dimension == 2):
-        row = [unit, '', value]
+    if(unit in records['unit'].unique()):
+        rowNum = records[records['unit'] == unit].index[0]
+        records.iloc[[rowNum],[dimension]] = value
+        worksheet.update_cell((rowNum+2), dimension+1, value)
     else:
-        row = [unit, '', '', value]
-    worksheet.append_row([unit, value])
-    records.loc[len(records.index)] = row
+        row = []
+        if(dimension == 1):
+            row = [unit, value, '', '', '']
+        elif(dimension == 2):
+            row = [unit, '', value, '', '']
+        else:
+            row = [unit, '', '', value, '']
+        worksheet.append_row(row)
+        records.loc[len(records.index)] = row
     return
 
 def set_up_api():

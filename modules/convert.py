@@ -27,10 +27,18 @@ def parse_message(message):
             value = words[i]
 
             # find unit
-            for unit in sheets.get_col('unit'):
+            unitsCheck = sheets.get_col('unit')
+            if(sheets.level == 1):
+                unitsCheck = unitsCheck[:8]
+            for unit in unitsCheck:
                 # convert to different unit based on level of bot and update message
-                if(unit in words[i+1].lower()):
-                    (resValue, resUnit) = convert_unit(float(value), unit, unit_select(unit, sheets.get_level())).split(' ')
+                if(unit in words[i+1].lower() or sheets.get_data(unit)[4] in words[i+1].lower()):
+                    newUnit = unit_select(unit, sheets.get_level())
+                    result = convert_unit(float(value), unit, newUnit)
+                    while(result == ''):
+                        newUnit = unit_select(unit, sheets.get_level())
+                        result = convert_unit(float(value), unit, newUnit)
+                    (resValue, resUnit) = result.split(' ')
                     words[i] = resValue
                     words[i+1] = resUnit
                     i+=1    
@@ -43,10 +51,11 @@ def parse_message(message):
 ### Return the value in terms of target
 def convert_unit(value, current, target):
     ### retrieved rows from sheets
-    cv = sheets.get_value(current)
-    print(target)
-    tv = sheets.get_value(target)
-    return str(value * cv/tv) + " " + str(target)
+    currentValue, currentIndex = sheets.get_value(current)
+    targetValue = sheets.get_data(target)[currentIndex]
+    if(not targetValue):
+        return ''
+    return str(value * currentValue/targetValue) + " " + str(target)
 
 
 # Given the current unit and bot level of chaos
@@ -56,6 +65,7 @@ def unit_select(unit, level):
         return "centimeter"
     # get possible units
     units = sheets.get_col('unit')
+    # Level 3, Crazy Units Only
     if(sheets.level == 3):
         units = units[9:]
     # pick one
