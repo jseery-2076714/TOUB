@@ -41,8 +41,8 @@ async def test_convert_SI_SI(interface):
 @test_collector()
 async def test_convert_SI_nonSI(interface):
     await interface.assert_reply_equals("!toub-convert 0 centimeter feet", "0.0 centimeter = 0.0 feet")
-    await interface.assert_reply_equals("!toub-convert 1 centimeter feet", "1.0 centimeter = 0.032808 feet")
-    await interface.assert_reply_equals("!toub-convert 2 centimeter feet", "2.0 centimeter = 0.065617 feet")
+    await interface.assert_reply_equals("!toub-convert 1 centimeter feet", "1.0 centimeter = 0.03280839895013123 feet")
+    await interface.assert_reply_equals("!toub-convert 2 centimeter feet", "2.0 centimeter = 0.06561679790026246 feet")
 
 # Testing convert command - non-SI to SI
 @test_collector()
