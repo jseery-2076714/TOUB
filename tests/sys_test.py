@@ -134,7 +134,7 @@ async def test_set_level_invalid(interface):
 @test_collector()
 async def test_help(interface):
     await interface.assert_reply_equals("!toub-help", '!toub-list : display all units\n'
-                + '!toub-list-r : display all units with ratios to SI\n'
+                + '!toub-list r: display all units with ratios to SI\n'
                 + '!toub-level : show what level toub is on\n'
                 + '!toub-level [level] : change the bot function to desired level of TOUB (1, 2, or 3)\n'
                 + '!toub-convert [value] [unit1] [unit2] : converts a value in unit1 to its value in unit2\n'
