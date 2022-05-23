@@ -40,8 +40,8 @@ def main():
             f'{client.user} is connected to the following guild:\n'
             f'{guild.name}(id: {guild.id})'
         )
-        print('We have logged in as {0.user}'.format(client))
         sheets.set_up_api()
+        print('We have logged in as {0.user}'.format(client))
 
     @client.event
     async def on_message(message):
@@ -183,7 +183,7 @@ def main():
                     firstUnit = input[1]
                     secondUnit = input[2]
                     result = convert.convert_unit(1, firstUnit, secondUnit)
-                    await message.channel.send(str(value) + " " + str(firstUnit) + " = " + result)
+                    await message.channel.send("1 " + str(firstUnit) + " = " + result)
                     return
             
             ### user command: !toub-convert [unit] [value] [dim]
@@ -200,7 +200,7 @@ def main():
                     await message.channel.send("Invalid dimension, must be between 1-3")
                     return
                 sheets.add_unit(unit, value, dimension)
-                await message.channel.send("Unit: " + unit + " : " + str(value) + " added!")
+                await message.channel.send("Unit: " + unit + " = " + str(value) + "cm^" + str(dimension) + " added!")
                 return
 
             ### user command: !toub-minigame
