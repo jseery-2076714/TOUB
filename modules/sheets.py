@@ -40,12 +40,12 @@ def add_unit(unit, value, dimension):
     else:
         row = []
         if(dimension == 1):
-            row = [unit, value, '', '']
+            row = [unit, value, '', '', '']
         elif(dimension == 2):
-            row = [unit, '', value, '']
+            row = [unit, '', value, '', '']
         else:
-            row = [unit, '', '', value]
-        worksheet.append_row([unit, value])
+            row = [unit, '', '', value, '']
+        worksheet.append_row(row)
         records.loc[len(records.index)] = row
     return
 
