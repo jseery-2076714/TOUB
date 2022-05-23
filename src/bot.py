@@ -83,15 +83,15 @@ async def on_message(message):
 @client.event
 async def on_reaction_add(reaction, user):
     if user != client.user:
-        if str(reaction.emoji) == '1️⃣' and MG.rightChoice() == '1':
+        if str(reaction.emoji) == '1️⃣' and MG.correctChoiceForBotGetter() == '1':
             await reaction.message.channel.send (MG.game_won())
-        elif str(reaction.emoji) == '2️⃣' and MG.rightChoice() == '2':
+        elif str(reaction.emoji) == '2️⃣' and MG.correctChoiceForBotGetter() == '2':
             await reaction.message.channel.send (MG.game_won())
-        elif str(reaction.emoji) == '3️⃣' and MG.rightChoice() == '3':
+        elif str(reaction.emoji) == '3️⃣' and MG.correctChoiceForBotGetter() == '3':
             await reaction.message.channel.send (MG.game_won())
-        elif str(reaction.emoji) == '4️⃣' and MG.rightChoice() == '4':
+        elif str(reaction.emoji) == '4️⃣' and MG.correctChoiceForBotGetter() == '4':
             await reaction.message.channel.send (MG.game_won())
-        elif str(reaction.emoji) == '5️⃣' and MG.rightChoice() != '1' and MG.rightChoice() != '2' and MG.rightChoice() != '3' and MG.rightChoice() != '4' :
+        elif str(reaction.emoji) == '5️⃣' and MG.correctChoiceForBotGetter() != '1' and MG.correctChoiceForBotGetter() != '2' and MG.correctChoiceForBotGetter() != '3' and MG.correctChoiceForBotGetter() != '4' :
             await reaction.message.channel.send (MG.game_won())
 
 ###################################################
