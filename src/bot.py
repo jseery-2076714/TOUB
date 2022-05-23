@@ -39,6 +39,7 @@ def main():
             f'{client.user} is connected to the following guild:\n'
             f'{guild.name}(id: {guild.id})'
         )
+        sheets.set_up_api()
         print('We have logged in as {0.user}'.format(client))
 
     @client.event
