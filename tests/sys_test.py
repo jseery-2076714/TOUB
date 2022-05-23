@@ -15,10 +15,9 @@ import platform
 test_collector = TestCollector()
 created_channel = None
 
-
-@test_collector()
-async def test_hello(interface):
-    await interface.assert_reply_equals("$hello", "Hello!")
+# @test_collector()
+# async def test_hello(interface):
+#     await interface.assert_reply_equals("$hello", "Hello!")
 
 
 # Write tests for the bot

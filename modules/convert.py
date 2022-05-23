@@ -25,7 +25,6 @@ def parse_message(message):
             if(i == len(words)-1):
                 break
             value = words[i]
-
             # find unit
             unitsCheck = sheets.get_col('unit')
             if(sheets.level == 1):
