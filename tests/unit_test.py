@@ -28,7 +28,7 @@ def test_columns():
 
 
 def test_value():
-    assert sheets.get_value('centimeter') == 1, 1
+    assert sheets.get_value('centimeter') == (1.0, 1)
 
 
 # Test convert.py
