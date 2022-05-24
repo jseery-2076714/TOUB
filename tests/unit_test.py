@@ -19,6 +19,18 @@ def test_retrieve():
     assert sheets.get_data('feet') == ['feet', 30.48, 929.0304, 28316.84659, 'ft']
 
 
+def test_level():
+    assert sheets.get_level() == 1
+
+
+def test_columns():
+    assert sheets.get_columns() == ['unit', 'len(cm)', 'area(cm^2)', 'vol(cm^3)', 'short name']
+
+
+def test_value():
+    assert sheets.get_value('centimeter') == 1, 1
+
+
 # Test convert.py
 def test_convert():
     assert convert.convert_unit(0, 'feet', 'yard') == '0.00e+00 yard'
@@ -30,5 +42,5 @@ def test_select():
     assert convert.unit_select('feet', 1) != 'feet'
 
 
-# def test_parse():
-#     assert convert.parse_message('1 feet') == 'Converted message'
+def test_parse():
+    assert convert.parse_message('1 feet') == '30.48 centimeter'
