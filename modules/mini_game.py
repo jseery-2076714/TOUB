@@ -31,19 +31,23 @@ def proc_input(input):
 
 #generates the correct answer given a unit, dimension, and amount 
 def gen_ans(unit, dim, amount):
-    cols = data.columns.to_numpy()
-    colvals = data[cols[dim]].to_numpy()
-    randomCorrectAnswer = rd.randint(0, 4)
+    # cols = data.columns.to_numpy()
+    # colvals = data[cols[dim]].to_numpy()
+    # randomCorrectAnswer = rd.randint(0, 4)
 
-    anotherRandUnit = colvals[randomCorrectAnswer]
-    givenUnitIntoCm = colvals[unit] 
-    ratio = givenUnitIntoCm / anotherRandUnit
-    ans = str(amount * ratio)
+    # anotherRandUnit = colvals[randomCorrectAnswer]
+    # givenUnitIntoCm = colvals[unit] 
+    # ratio = givenUnitIntoCm / anotherRandUnit
+    # ans = str(amount * ratio)
 
-    return ans + " " + data.loc[randomCorrectAnswer][0]
+    secondUnit = CONVERT.unit_select(unit, dim)
+    result = str(CONVERT.conver_unit(amount, unit, secondUnit))
+    
+    return result + " " + secondUnit
 
 #generates wrong answers given a unit, dimension, and amount 
 def gen_rand_wrong_ans(unit, dim, amount):
+    
     wrongUnit = rd.randint(0,4)
     wrongNum = rd.randint(1,3)
 
@@ -55,15 +59,20 @@ def gen_rand_wrong_ans(unit, dim, amount):
     while(wrongNum == dim):
         wrongNum = rd.randint(1,3)
 
-    cols = data.columns.to_numpy()
-    colvals = data[cols[wrongNum]].to_numpy()
+    wrongSecondUnit = CONVERT.unit_select(wrongUnit, wrongNum)
+    wrongResult = str(CONVERT.conver_unit(amount, wrongUnit, wrongSecondUnit))
+    
+    return wrongResult + " " + wrongSecondUnit
 
-    anotherRandUnit = colvals[wrongUnit]
-    givenUnitIntoCm = colvals[wrongNum] 
-    ratio = givenUnitIntoCm / anotherRandUnit
-    ans = str(amount * ratio) 
+    # cols = data.columns.to_numpy()
+    # colvals = data[cols[wrongNum]].to_numpy()
 
-    return ans + " " + data.loc[wrongUnit][0]
+    # anotherRandUnit = colvals[wrongUnit]
+    # givenUnitIntoCm = colvals[wrongNum] 
+    # ratio = givenUnitIntoCm / anotherRandUnit
+    # ans = str(amount * ratio) 
+
+    #return ans + " " + data.loc[wrongUnit][0]
 
 
 
