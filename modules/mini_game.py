@@ -2,12 +2,22 @@
 import pandas as pd
 import numpy as np
 import random as rd
+import importlib, importlib.util
 
 correctChoiceForBot = ''
  
 
 data_file = 'src/data/data_toub_conv.csv'
 data = pd.read_csv(data_file)
+
+def module_directory(name_module, path):
+    p = importlib.util.spec_from_file_location(name_module, path)
+    import_module = importlib.util.module_from_spec(p)
+    p.loader.exec_module(import_module)
+    return import_module
+    
+CONVERT = module_directory("convert", "./modules/convert.py")
+SHEETS = module_directory("sheets", "./modules/sheets.py")
 
 def prompt():
     return 'Test your unit conversion smarts with this fun minigame. Use the reactions to pick the correct option'
