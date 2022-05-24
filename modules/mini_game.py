@@ -40,16 +40,18 @@ def gen_ans(unit, dim, amount):
     # ratio = givenUnitIntoCm / anotherRandUnit
     # ans = str(amount * ratio)
 
-    secondUnit = CONVERT.unit_select(unit, dim)
-    result = str(CONVERT.conver_unit(amount, unit, secondUnit))
+
+    secondUnit = CONVERT.unit_select(unit, 3)
+    result = CONVERT.convert_unit(amount, unit, secondUnit)
     
-    return result + " " + secondUnit
+    return result
 
 #generates wrong answers given a unit, dimension, and amount 
 def gen_rand_wrong_ans(unit, dim, amount):
-    
-    wrongUnit = rd.randint(0,4)
+   
     wrongNum = rd.randint(1,3)
+    ### wrongUnitNum = rd.randint(0,4)
+    wrongUnit = CONVERT.unit_select(unit, 3)
 
     #loops so that the same unit and number
     #that was passed in cannot be used again
@@ -60,9 +62,9 @@ def gen_rand_wrong_ans(unit, dim, amount):
         wrongNum = rd.randint(1,3)
 
     wrongSecondUnit = CONVERT.unit_select(wrongUnit, wrongNum)
-    wrongResult = str(CONVERT.conver_unit(amount, wrongUnit, wrongSecondUnit))
+    wrongResult = CONVERT.convert_unit(amount, wrongUnit, wrongSecondUnit)
     
-    return wrongResult + " " + wrongSecondUnit
+    return wrongResult 
 
     # cols = data.columns.to_numpy()
     # colvals = data[cols[wrongNum]].to_numpy()
@@ -92,13 +94,16 @@ def game_func1():
     correctChoice = rightChoice()
     rem_options = list(set(option).difference(set(correctChoice)))
 
-    correctAns = gen_ans(randomUnitNum, randomDimNum, randomNum) 
+    ###instead of unit num, need to pass in the unit!
+    ### this will get a unit that is of any of the three levels
+    unitRand = CONVERT.unit_select("inch", 3)
+    correctAns = gen_ans(unitRand, randomDimNum, randomNum) 
 
     print(correctChoice + " : " + correctAns)
 
-    randGen1 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
-    randGen2 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
-    randGen3 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
+    randGen1 = gen_rand_wrong_ans(unitRand, randomDimNum, randomNum)
+    randGen2 = gen_rand_wrong_ans(unitRand, randomDimNum, randomNum)
+    randGen3 = gen_rand_wrong_ans(unitRand, randomDimNum, randomNum)
     key_value = {correctChoice: correctAns, rem_options[0]:randGen1, rem_options[1]:randGen2, rem_options[2]:randGen3, '5': "None of the above"}
     
     returner = "What is " + str(randomNum)+ " " + randomUnit + " equal to? \n"
