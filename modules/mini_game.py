@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import random as rd
 
+correctChoiceForBot = ''
+ 
 
 data_file = 'src/data/data_toub_conv.csv'
 data = pd.read_csv(data_file)
@@ -36,8 +38,7 @@ def gen_rand_wrong_ans(unit, dim, amount):
     wrongNum = rd.randint(1,3)
 
     #loops so that the same unit and number
-    #that was passed in cannot be
-    #used again
+    #that was passed in cannot be used again
     while(wrongUnit == unit):
         wrongUnit = rd.randint(0,4)
     
@@ -64,7 +65,7 @@ def game_func1():
     randomDimNum = rd.randint(1,3)
     convArr = data.loc[randomUnitNum].to_numpy()
     randomUnit = convArr[0]
-    randomNum = rd.randint(0, 10000000)
+    randomNum = rd.randint(0, 100)
 
     # random not the unit above
     # generate 4 other relevant options
@@ -73,6 +74,8 @@ def game_func1():
     rem_options = list(set(option).difference(set(correctChoice)))
 
     correctAns = gen_ans(randomUnitNum, randomDimNum, randomNum) 
+
+    print(correctChoice + " : " + correctAns)
 
     randGen1 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
     randGen2 = gen_rand_wrong_ans(randomUnitNum, randomDimNum, randomNum)
@@ -88,9 +91,14 @@ def game_func1():
 #returns the correct choice so 
 #it can be checked with the discord bot
 def rightChoice():
+    global correctChoiceForBot
     option = ['1', '2', '3', '4']
     correctChoice = rd.choice(option)
+    correctChoiceForBot = correctChoice
     return correctChoice
+
+def correctChoiceForBotGetter():
+    return correctChoiceForBot
 
 #returns string for when game is won
 def game_won():
