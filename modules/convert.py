@@ -71,7 +71,7 @@ def unit_select(unit, level):
     units = sheets.get_col('unit')
     # Level 3, Crazy Units Only
     if(sheets.level == 3):
-        units = units[9:]
+        units = units[10:]
     # pick one
     newUnit = rd.choice(units)
     # if it is the same unit, pick a new one
