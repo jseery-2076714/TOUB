@@ -18,11 +18,11 @@ created_channel = None
 
 # Write tests for the bot
 
-
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Convert command tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # Testing convert command - non-SI to non-SI
 @test_collector()
 async def test_convert_nonSI_nonSI_0(interface):
+    interface.send_message("Running system tests")
     await interface.assert_reply_equals("!toub-convert 0 feet yard", "0.0 feet = 0.00e+00 yard")
 
 
