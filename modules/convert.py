@@ -15,7 +15,7 @@ sheets.set_up_api()
 
 # Given a message from Discord
 # Return converted message
-def parse_message(message):
+def parse_message(message, level):
     # error checking
     
     # Split message up
@@ -29,15 +29,15 @@ def parse_message(message):
             value = words[i]
             # find unit
             unitsCheck = sheets.get_col('unit')
-            if(sheets.level == 1):
+            if(level == 1):
                 unitsCheck = unitsCheck[:8]
             for unit in unitsCheck:
                 # convert to different unit based on level of bot and update message
                 if(unit in words[i+1].lower() or sheets.get_data(unit)[4] in words[i+1].lower()):
-                    newUnit = unit_select(unit, sheets.get_level())
+                    newUnit = unit_select(unit, level)
                     result = convert_unit(float(value), unit, newUnit)
                     while(result == ''):
-                        newUnit = unit_select(unit, sheets.get_level())
+                        newUnit = unit_select(unit, level)
                         result = convert_unit(float(value), unit, newUnit)
                     (resValue, resUnit) = result.split(' ')
                     words[i] = resValue
@@ -67,7 +67,7 @@ def unit_select(unit, level):
     # get possible units
     units = sheets.get_col('unit')
     # Level 3, Crazy Units Only
-    if(sheets.level == 3):
+    if(level == 3):
         units = units[9:]
     # pick one
     newUnit = rd.choice(units)

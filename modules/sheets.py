@@ -13,6 +13,10 @@ def get_records():
 def get_level():
     return level
 
+def set_level(newLevel):
+    level = newLevel
+    
+
 # Returns the column names as a list
 def get_columns():
     return records.columns.to_list()
