@@ -1,6 +1,6 @@
 # Parsing and conversion
 import random as rd
-import importlib, importlib.util
+import importlib,  importlib.util
  
 def module_directory(name_module, path):
     P = importlib.util.spec_from_file_location(name_module, path)
