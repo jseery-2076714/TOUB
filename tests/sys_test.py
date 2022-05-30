@@ -89,13 +89,6 @@ async def test_level2_nonSI_obscure(interface):
     await interface.assert_reply_equals("2 feet", "60.96 centimeter")
 """
 
-# Testing - SI to SI
-@test_collector()
-async def test_level2_SI_SI(interface):
-    await interface.assert_reply_equals("0 centimeter", "0.00e+00 centimeter")
-    await interface.assert_reply_equals("1 centimeter", "1.0 centimeter")
-    await interface.assert_reply_equals("2 centimeter", "2.0 centimeter")
-
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! More level command tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # Testing setting level to level 3
