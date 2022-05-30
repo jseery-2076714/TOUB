@@ -171,18 +171,22 @@ async def toub_level(message, inputs):
         templevel = float(inputs[0])
         ### change to level 1
         if(templevel == 1.0):
+            CONVERT.change_level(1)
             SHEETS.level = 1
             await message.channel.send('Current level: ' + str(SHEETS.level))
         ### change to level 2
         elif(templevel == 2.0):
+            CONVERT.change_level(2)
             SHEETS.level = 2
             await message.channel.send('Current level: ' + str(SHEETS.level))
         ### change to level 3
         elif (templevel == 3.0):
+            CONVERT.change_level(3)
             SHEETS.level = 3
             await message.channel.send('Current level: ' + str(SHEETS.level))                    
         ### Not a valid level, default to level 1
         else:
+            CONVERT.change_level(1)
             SHEETS.level = 1
             await message.channel.send('Not a valid level. Default to level 1')
     return
@@ -251,11 +255,11 @@ async def toub_minigame(message, inputs):
 
 ### not a toub command
 async def toub_parse(channel, content):
-    parsed = CONVERT.parse_message(content)
+    parsed = CONVERT.parse_message(content, SHEETS.level)
     if(parsed == content):
         return
     else:
-        await channel.send(CONVERT.parse_message(content))
+        await channel.send(CONVERT.parse_message(content, SHEETS.level))
 
 if __name__ == "__main__":
     main()
