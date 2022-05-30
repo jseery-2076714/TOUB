@@ -56,7 +56,12 @@ def convert_unit(value, current, target):
     targetValue = sheets.get_data(target)[currentIndex]
     if(not targetValue):
         return ''
-    return str(value * currentValue/targetValue) + " " + str(target)
+    eVal = value * currentValue/targetValue
+    if (eVal <= 1.0/10000.0):
+        eVal = f"{eVal:.2e}"
+    elif (eVal >= 10000.0):
+        eVal = f"{eVal:.2e}"
+    return str(eVal) + " " + str(target)
 
 
 # Given the current unit and bot level of chaos

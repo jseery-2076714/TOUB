@@ -23,8 +23,7 @@ Go to "Server Settings" from the drop down menu.
 Click on ‘Roles’, scroll down, and enable ‘Manage Server’ permission under the
 General Server Permissions section. Once done, click on ‘Save Changes’.
 Open your browser and paste the following URL:
-https://discordapp.com/oauth2/authorize
-client_id=970509633179492393&scope=bot&permissions=0
+https://discord.com/api/oauth2/authorize?client_id=970509633179492393&permissions=8&scope=bot
 Select the server you want to add TOUB to and click "Authorize"
 
 
