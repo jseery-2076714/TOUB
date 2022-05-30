@@ -81,5 +81,5 @@ def unit_select(unit, level):
 
 # Changes level of bot
 def change_level(level):
-    SHEETS.level = level
+    sheets.level = level
     return
