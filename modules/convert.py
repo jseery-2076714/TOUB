@@ -1,8 +1,6 @@
 # Parsing and conversion
 import random as rd
 import importlib, importlib.util
-
-from bot import SHEETS
  
 def module_directory(name_module, path):
     P = importlib.util.spec_from_file_location(name_module, path)
