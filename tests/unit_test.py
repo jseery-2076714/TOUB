@@ -44,7 +44,7 @@ def test_select():
 
 def test_parse():
     assert sheets.get_level() == 1
-    assert convert.parse_message('0 feet') == '0.00e+00 centimeter'
-    assert convert.parse_message('1 feet') == '30.48 centimeter'
-    assert convert.parse_message('0 centimeter') == '0.00e+00 centimeter'
-    assert convert.parse_message('1 centimeter') == '1.0 centimeter'
+    assert convert.parse_message('0 feet', 1) == '0.00e+00 centimeter'
+    assert convert.parse_message('1 feet', 1) == '30.48 centimeter'
+    assert convert.parse_message('0 centimeter', 1) == '0.00e+00 centimeter'
+    assert convert.parse_message('1 centimeter', 1) == '1.0 centimeter'

@@ -154,7 +154,7 @@ async def test_level2_SI_SI_1(interface):
 async def test_level2_SI_SI_2(interface):
     await interface.assert_reply_equals("2 centimeter", "2.0 centimeter")
 
-
+    
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! More level command tests !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # Testing setting level to level 3
 @test_collector()
